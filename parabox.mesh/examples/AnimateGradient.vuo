@@ -1,0 +1,31 @@
+digraph G
+{
+ChangeAllShaders [type="vuo.scene.shader.all" version="2.0.0" label="Change All Shaders|<refresh>refresh\l|<object>object\l|<shader>shader\l|<shadedObject>shadedObject\r" pos="459,275" fillcolor="magenta"];
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="-57,48" _started_eventThrottling="enqueue"];
+Make3DTransform [type="vuo.transform.make" version="1.0.0" label="Make 3D Transform|<refresh>refresh\l|<translation>translation\l|<rotation>rotation\l|<scale>scale\l|<transform>transform\r" pos="218,123" fillcolor="green" _translation="{\"x\":0.000000,\"y\":0.000000,\"z\":0.000000}" _rotation="{\"x\":0,\"y\":0,\"z\":0}" _scale="{\"x\":0.500000,\"y\":0.500000,\"z\":0.500000}"];
+MakeCube [type="vuo.scene.make.cube" version="1.0.0" label="Make Cube|<refresh>refresh\l|<transform>transform\l|<frontShader>frontShader\l|<leftShader>leftShader\l|<rightShader>rightShader\l|<backShader>backShader\l|<topShader>topShader\l|<bottomShader>bottomShader\l|<cube>cube\r" pos="508,125" fillcolor="green"];
+MakeDraggableCamera [type="vuo.scene.make.camera.drag" version="1.0.0" label="Make Draggable Camera|<refresh>refresh\l|<name>name\l|<modifierKey>modifierKey\l|<window>window\l|<fieldOfView>fieldOfView\l|<distanceMin>distanceMin\l|<distanceMax>distanceMax\l|<reset>reset\l|<updatedCamera>updatedCamera\r" pos="117,513" fillcolor="orange" _name="\"camera\"" _modifierKey="\"any\"" _fieldOfView="90.000000" _distanceMin="0.100000" _distanceMax="10.000000" _updatedCamera_eventThrottling="enqueue"];
+MakeList [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="402,528" fillcolor="orange"];
+MakeList2 [type="vuo.list.make.2.VuoWindowProperty" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="452,558" fillcolor="orange"];
+MakeList4 [type="vuo.list.make.2.VuoColor" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="-338,333" _1="{\"r\":1,\"g\":1,\"b\":1,\"a\":1}" _2="{\"r\":0,\"g\":0,\"b\":0,\"a\":1}"];
+MakeList5 [type="vuo.list.make.1.VuoImage" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="115,332" fillcolor="magenta"];
+MakeRadialGradientImage [type="vuo.image.make.gradient.radial" version="1.0.1" label="Make Radial Gradient Image|<refresh>refresh\l|<colors>colors\l|<center>center\l|<radius>radius\l|<width>width\l|<height>height\l|<image>image\r" pos="-268,322" _center="{\"x\":0,\"y\":0}" _radius="1" _width="640" _height="640"];
+MakeShaderWithGLSL [type="co.parabox.shader.make.glsl" version="2.0.0" label="Make Shader with GLSL|<refresh>refresh\l|<vertexShader>vertexShader\l|<fragmentShader>fragmentShader\l|<images>images\l|<floats>floats\l|<time>time\l|<shader>shader\r" pos="164,291" fillcolor="magenta" _vertexShader="\"#version 120\\n\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tuniform mat4 projectionMatrix;\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tuniform mat4 modelviewMatrix;\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tattribute vec4 position;\\t\\t\\t\\/\\/ vertex position\\n\\t\\t\\t\\t\\t\\t\\t\\tattribute vec4 normal;\\t\\t\\t\\t\\/\\/ vertex normal\\n\\t\\t\\t\\t\\t\\t\\t\\t\\tattribute vec4 textureCoordinate;\\t\\/\\/ uv position\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tvarying vec4 vertNormal;\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tvarying vec4 texCoord;\\t\\t\\t\\t\\/\\/ uv coordinate\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tvoid main(void)\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t{\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\ttexCoord = textureCoordinate;\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tvertNormal = normalize(modelviewMatrix * normal);\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\tgl_Position = projectionMatrix * modelviewMatrix * position;\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t}\"" _fragmentShader="\"#version 120\\n\\nvarying vec4 texCoord;\\nuniform sampler2D image0;\\nuniform float time;\\n\\nvoid main(void)\\n{\\n\\tvec4 col = texture2D(image0, texCoord.xy);\\n\\tcol.x = sin(time) * texCoord.x;\\n\\tcol.y = sin(time) * texCoord.y;\\n\\tgl_FragColor = col;\\n}\""];
+RenderSceneToWindow [type="vuo.scene.render.window" version="2.2.0" label="Render Scene to Window|<refresh>refresh\l|<objects>objects\l|<cameraName>cameraName\l|<setWindowProperties>setWindowProperties\l|<showedWindow>showedWindow\r|<requestedFrame>requestedFrame\r" pos="498,517" fillcolor="orange" _showedWindow_eventThrottling="enqueue" _requestedFrame_eventThrottling="drop"];
+
+ChangeAllShaders:shadedObject -> MakeList:2;
+FireOnStart:started -> Make3DTransform:refresh;
+FireOnStart:started -> MakeRadialGradientImage:refresh;
+FireOnStart:started -> MakeShaderWithGLSL:refresh;
+Make3DTransform:transform -> MakeCube:transform;
+MakeCube:cube -> ChangeAllShaders:object;
+MakeDraggableCamera:updatedCamera -> MakeList:1;
+MakeList2:list -> RenderSceneToWindow:setWindowProperties;
+MakeList4:list -> MakeRadialGradientImage:colors;
+MakeList5:list -> MakeShaderWithGLSL:images;
+MakeList:list -> RenderSceneToWindow:objects;
+MakeRadialGradientImage:image -> MakeList5:1;
+MakeShaderWithGLSL:shader -> ChangeAllShaders:shader;
+RenderSceneToWindow:requestedFrame -> MakeShaderWithGLSL:time;
+RenderSceneToWindow:showedWindow -> MakeDraggableCamera:window;
+}
