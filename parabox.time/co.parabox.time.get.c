@@ -15,7 +15,7 @@ VuoModuleMetadata({
 					 "keywords" : [ "second", "minute", "hour", "clock", "watch", "pink floyd", "date", "month", "year" ],
 					 "version" : "1.0.0",
 					 "description": "Get the current date and time.\n \n - `Year` – The current year.\n - `Month` – The number of months since January (eg, January is 1, February is 2, ... October is 10).\n - `Day` – The current day of the month.\n - `Hour` – The hours since midnight (Midnight is 0, noon is 12, 1pm is 11).\n - `Minute` – The number minutes from the top of the hour.\n - `Second` – The number of seconds from the top of the minute (0 - 59).\n",
-					 "dependencies" : [ "" ],
+					 "dependencies" : [ ],
 					 "node" : {
 						  "exampleCompositions" : [ "" ]
 					 }
