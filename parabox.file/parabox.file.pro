@@ -2,10 +2,7 @@ TEMPLATE = aux
 cache()
 
 NODE_SOURCES += \
-	co.parabox.mesh.get.c\
-        co.parabox.mesh.make.c \
-        co.parabox.file.text.c \
-	co.parabox.shader.make.glsl.c
+	co.parabox.file.text.c
 
 OTHER_FILES += $$NODE_SOURCES
 

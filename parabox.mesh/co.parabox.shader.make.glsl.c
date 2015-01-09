@@ -117,28 +117,28 @@ void nodeInstanceEvent
 	/**
 	 *	Load Images
 	 */
-	if(imagesEvent)
+	if(imagesEvent || fragmentShaderEvent || vertexShaderEvent)
 	{
 		for(int CurImageIndex = 0; CurImageIndex < VuoListGetCount_VuoImage(images); CurImageIndex++)
 		{		
 			char imageUniform [8];
 			int n = sprintf (imageUniform, "image%u", CurImageIndex);
 
-			VuoShader_setUniform_VuoImage((*instance)->shader, imageUniform, VuoListGetValue_VuoImage(images, CurImageIndex));
+			VuoShader_setUniform_VuoImage((*instance)->shader, imageUniform, VuoListGetValue_VuoImage(images, CurImageIndex+1));
 		}
 	}
 
 	/**
 	 *	Set float values
 	 */
-	if(floatsEvent)
+	if(floatsEvent || fragmentShaderEvent || vertexShaderEvent)
 	{
 		for(int CurFloatIndex = 0; CurFloatIndex < VuoListGetCount_VuoReal(floats); CurFloatIndex++)
 		{		
 			char floatUniform [8];
 			int n = sprintf (floatUniform, "float%u", CurFloatIndex);
 
-			VuoShader_setUniform_VuoImage((*instance)->shader, floatUniform, VuoListGetValue_VuoImage(images, CurFloatIndex));
+			VuoShader_setUniform_VuoReal((*instance)->shader, floatUniform, VuoListGetValue_VuoReal(floats, CurFloatIndex+1));
 		}
 	}
 
