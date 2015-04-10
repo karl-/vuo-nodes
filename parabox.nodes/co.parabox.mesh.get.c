@@ -27,7 +27,7 @@ VuoModuleMetadata({
 
 void nodeEvent
 (
-		VuoInputData(VuoMesh) mesh,
+		VuoInputData(VuoSceneObject) object,
 		VuoOutputData(VuoList_VuoPoint3d) positions,
 		VuoOutputData(VuoList_VuoInteger) elements,
 		VuoOutputData(VuoList_VuoPoint3d) normals,
@@ -42,31 +42,38 @@ void nodeEvent
 	*bitangents = VuoListCreate_VuoPoint3d();
 	*textures 	= VuoListCreate_VuoPoint2d();
 
-	for(unsigned int CurSubmesh = 0; CurSubmesh < mesh->submeshCount; CurSubmesh++)
-	{
-		VuoSubmesh* submesh = &mesh->submeshes[CurSubmesh];
+//	for(unsigned int i = 0; i < VuoListGetCount_VuoSceneObject(object.childObjects); i++)
+//	{
+		VuoSceneObject obj = object;//VuoListGetValue_VuoSceneObject(object.childObjects, i+1);
 
-		for(unsigned int CurIndex = 0; CurIndex < submesh->vertexCount; CurIndex++)
+		VuoMesh mesh = obj.mesh;
+
+		for(unsigned int CurSubmesh = 0; CurSubmesh < mesh->submeshCount; CurSubmesh++)
 		{
-			VuoPoint4d v = submesh->positions[CurIndex];
-			VuoListAppendValue_VuoPoint3d(*positions, (VuoPoint3d) {v.x, v.y, v.z} );
+			VuoSubmesh* submesh = &mesh->submeshes[CurSubmesh];
 
-			v = submesh->normals[CurIndex];
-			VuoListAppendValue_VuoPoint3d(*normals, (VuoPoint3d) {v.x, v.y, v.z});
+			for(unsigned int CurIndex = 0; CurIndex < submesh->vertexCount; CurIndex++)
+			{
+				VuoPoint4d v = submesh->positions[CurIndex];
+				VuoListAppendValue_VuoPoint3d(*positions, (VuoPoint3d) {v.x, v.y, v.z} );
 
-			v = submesh->tangents[CurIndex];
-			VuoListAppendValue_VuoPoint3d(*tangents, (VuoPoint3d) {v.x, v.y, v.z});
+				v = submesh->normals[CurIndex];
+				VuoListAppendValue_VuoPoint3d(*normals, (VuoPoint3d) {v.x, v.y, v.z});
 
-			v = submesh->bitangents[CurIndex];
-			VuoListAppendValue_VuoPoint3d(*bitangents, (VuoPoint3d) {v.x, v.y, v.z});
+				v = submesh->tangents[CurIndex];
+				VuoListAppendValue_VuoPoint3d(*tangents, (VuoPoint3d) {v.x, v.y, v.z});
 
-			v = submesh->textureCoordinates[CurIndex];
-			VuoListAppendValue_VuoPoint2d(*textures, (VuoPoint2d) {v.x, v.y});
+				v = submesh->bitangents[CurIndex];
+				VuoListAppendValue_VuoPoint3d(*bitangents, (VuoPoint3d) {v.x, v.y, v.z});
+
+				v = submesh->textureCoordinates[CurIndex];
+				VuoListAppendValue_VuoPoint2d(*textures, (VuoPoint2d) {v.x, v.y});
+			}
+
+			for(unsigned int CurElement = 0; CurElement < submesh->elementCount; CurElement++)
+			{
+				VuoListAppendValue_VuoInteger(*elements, submesh->elements[CurElement]);
+			}
 		}
-
-		for(unsigned int CurElement = 0; CurElement < submesh->elementCount; CurElement++)
-		{
-			VuoListAppendValue_VuoInteger(*elements, submesh->elements[CurElement]);
-		}
-	}
+//	}
 }
