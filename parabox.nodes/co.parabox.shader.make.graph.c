@@ -3,9 +3,10 @@
 #include <OpenGL/CGLMacro.h>
 
 VuoModuleMetadata({
-					  "title" : "Make Bar Graph",
+					  "title" : "Make Graph",
 					  "keywords" : [ "waveform", "audio", "clipart" ],
 					  "version" : "1.0.0",
+					  "description": "Creates a graph image from a list of real values.\n\nIf maxValue is greater than 0, the the Y axis of the graph is plotted from 0 to maxValue, otherwise the largest point in the list is used."
 					  "node": {
 						  // "exampleCompositions" : [ ".vuo" ]
 					  }
@@ -64,7 +65,7 @@ void nodeInstanceEvent
 (
 		VuoInstanceData(struct nodeInstanceData *) instance,
 		VuoInputData(VuoList_VuoReal) samples,
-		VuoInputData(VuoColor) color,
+		VuoInputData(VuoColor, {"default":{"r":0.2, "g":0.2, "b":0.9, "a":1}}) color,
 		VuoInputData(VuoInteger, {"default":0, "suggestedMin":0, "suggestedMax":1}) chartType,
 		VuoInputData(VuoReal, {"default":1}) maxValue,
 		VuoInputData(VuoInteger, {"default":640, "suggestedMin":1, "suggestedStep":32}) width,

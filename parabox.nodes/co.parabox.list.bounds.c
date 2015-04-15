@@ -10,7 +10,7 @@
 #include "node.h"
 
 VuoModuleMetadata({
-					 "title" : "List Bounds",
+					 "title" : "Get List Bounds",
 					 "keywords" : [ "min", "max", "range" ],
 					 "version" : "1.0.0",
 					  "genericTypes" : {
