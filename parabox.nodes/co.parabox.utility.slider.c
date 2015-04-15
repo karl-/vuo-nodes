@@ -1,6 +1,6 @@
 /**
  * @file
- * co.parabox.file.text node implementation.
+ * co.parabox.utility.slider node implementation.
  *
  * @copyright Copyright © 2012–2014 Kosada Incorporated.
  * This code may be modified and distributed under the terms of the MIT License.
@@ -12,12 +12,14 @@
 
 VuoModuleMetadata({
 					 "title" : "Generic Slider",
-					 "keywords" : [ "i/o", "input", "data" ],
+					 "keywords" : [ "normalize", "gizmo", "widget", "ui" ],
 					 "version" : "1.0.0",
-					 "description": "Slide!.",
-					 "dependencies" : [
-						 "VuoGlContext"
-					 ],
+					 "description": "A slider input from 0-1 that outputs a scaled value.",
+					  "genericTypes" : {
+						 "VuoGenericType1" : {
+							 "compatibleTypes" : [ "VuoReal", "VuoInteger" ]
+						 }
+					 },
 					 "node" : {
 						  "exampleCompositions" : [ "" ]
 					 }
@@ -25,9 +27,12 @@ VuoModuleMetadata({
 
 void nodeEvent
 (
-	VuoInputData(VuoInteger, {"default":440, "suggestedMin":0, "suggestedMax":12000, "suggestedStep":10}) value,
-	VuoOutputData(VuoInteger) val
+	VuoInputData(VuoReal, {"default":1, "suggestedMin":0, "suggestedMax":1}) value,
+	VuoInputData(VuoGenericType1) minimum,
+	VuoInputData(VuoGenericType1) maximum,
+	VuoOutputData(VuoGenericType1) output
 )
 {
-	*val = value;
+	float clamp = fmin(fmax(value, 0), 1);
+	*output = (clamp * (maximum-minimum)) + minimum;
 }

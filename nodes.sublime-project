@@ -1,0 +1,27 @@
+{
+	"folders":
+	[
+		{
+			"path": "parabox.nodes",
+			"file_exclude_patterns":
+			[
+				"*.bc",
+				"*.bc+",
+				"*.vuonode",
+				"*.vuonode+",
+				"Makefile",
+				"*.cache",
+				"*.stash",
+				"*.pri",
+				"*.pch",
+				"*.shared",
+				"*.o"
+			],
+			"folder_exclude_patterns":
+			[
+				"pch",
+				"binary"
+			],
+		}
+	]
+}

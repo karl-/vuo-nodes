@@ -1,2 +1,8 @@
 *.DS_Store
 *.cache
+*.o
+*.bc
+*.stash
+*.pro.user
+Makefile
+*.sublime-workspace

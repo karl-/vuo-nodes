@@ -54,84 +54,14 @@ OBJECTS       = co.parabox.time.get.vuonode \
 		co.parabox.shader.make.graph.vuonode \
 		co.parabox.shader.make.glsl.vuonode \
 		co.parabox.list.average.vuonode \
-		co.parabox.event.drop.vuonode
-DIST          = /usr/local/Cellar/qt/5.3.1/mkspecs/features/spec_pre.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/qdevice.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/device_config.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/common/shell-unix.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/common/unix.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/common/mac.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/common/macx.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/common/gcc-base.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/common/gcc-base-mac.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/common/g++-base.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/common/g++-macx.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/qconfig.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_bluetooth.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_bluetooth_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_bootstrap_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_clucene_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_concurrent.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_concurrent_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_core.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_core_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_gui.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_gui_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_help.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_help_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_macextras.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_macextras_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_multimedia.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_multimedia_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_multimediawidgets.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_network.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_network_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_nfc.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_nfc_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_opengl.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_opengl_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_openglextensions.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_openglextensions_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_platformsupport_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_positioning.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_positioning_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_printsupport.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_printsupport_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_sensors.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_sensors_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_serialport.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_serialport_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_sql.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_sql_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_testlib.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_testlib_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_uitools.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_uitools_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_websockets.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_websockets_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_widgets.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_widgets_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_xml.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/modules/qt_lib_xml_private.pri \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/qt_functions.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/qt_config.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/macx-g++/qmake.conf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/spec_post.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/exclusive_builds.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/default_pre.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/mac/default_pre.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/resolve_config.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/default_post.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/mac/sdk.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/mac/default_post.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/mac/objective_c.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/warn_on.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/mac/rez.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/testcase_targets.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/exceptions.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/yacc.prf \
-		/usr/local/Cellar/qt/5.3.1/mkspecs/features/lex.prf \
+		co.parabox.list.bounds.vuonode \
+		co.parabox.utility.slider.vuonode \
+		co.parabox.event.drop.vuonode \
+		co.parabox.shader.make.uniform.vuonode \
+		PbxShaderUniform.bc \
+		VuoList_PbxShaderUniform.bc
+DIST          = .qmake.cache \
+		.qmake.stash \
 		parabox.nodes.pro 
 QMAKE_TARGET  = parabox
 DESTDIR       = #avoid trailing-slash linebreak
@@ -243,6 +173,8 @@ Makefile: parabox.nodes.pro .qmake.cache /usr/local/Cellar/qt/5.3.1/mkspecs/macx
 		/usr/local/Cellar/qt/5.3.1/mkspecs/features/qt_config.prf \
 		/usr/local/Cellar/qt/5.3.1/mkspecs/macx-g++/qmake.conf \
 		/usr/local/Cellar/qt/5.3.1/mkspecs/features/spec_post.prf \
+		.qmake.cache \
+		.qmake.stash \
 		/usr/local/Cellar/qt/5.3.1/mkspecs/features/exclusive_builds.prf \
 		/usr/local/Cellar/qt/5.3.1/mkspecs/features/default_pre.prf \
 		/usr/local/Cellar/qt/5.3.1/mkspecs/features/mac/default_pre.prf \
@@ -322,6 +254,8 @@ Makefile: parabox.nodes.pro .qmake.cache /usr/local/Cellar/qt/5.3.1/mkspecs/macx
 /usr/local/Cellar/qt/5.3.1/mkspecs/features/qt_config.prf:
 /usr/local/Cellar/qt/5.3.1/mkspecs/macx-g++/qmake.conf:
 /usr/local/Cellar/qt/5.3.1/mkspecs/features/spec_post.prf:
+.qmake.cache:
+.qmake.stash:
 /usr/local/Cellar/qt/5.3.1/mkspecs/features/exclusive_builds.prf:
 /usr/local/Cellar/qt/5.3.1/mkspecs/features/default_pre.prf:
 /usr/local/Cellar/qt/5.3.1/mkspecs/features/mac/default_pre.prf:
@@ -344,12 +278,12 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/parabox1.0.0 || mkdir -p .tmp/parabox1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/parabox1.0.0/ && $(COPY_FILE) --parents co.parabox.time.get.c co.parabox.file.text.c co.parabox.mesh.get.c co.parabox.mesh.make.c co.parabox.mesh.triangle.c co.parabox.shader.make.graph.c co.parabox.shader.make.glsl.c co.parabox.list.average.c co.parabox.event.drop.c .tmp/parabox1.0.0/ && (cd `dirname .tmp/parabox1.0.0` && $(TAR) parabox1.0.0.tar parabox1.0.0 && $(COMPRESS) parabox1.0.0.tar) && $(MOVE) `dirname .tmp/parabox1.0.0`/parabox1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/parabox1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/parabox1.0.0/ && $(COPY_FILE) --parents co.parabox.time.get.c co.parabox.file.text.c co.parabox.mesh.get.c co.parabox.mesh.make.c co.parabox.mesh.triangle.c co.parabox.shader.make.graph.c co.parabox.shader.make.glsl.c co.parabox.list.average.c co.parabox.list.bounds.c co.parabox.utility.slider.c co.parabox.event.drop.c co.parabox.shader.make.uniform.c .tmp/parabox1.0.0/ && $(COPY_FILE) --parents PbxShaderUniform.c VuoList_PbxShaderUniform.cc .tmp/parabox1.0.0/ && (cd `dirname .tmp/parabox1.0.0` && $(TAR) parabox1.0.0.tar parabox1.0.0 && $(COMPRESS) parabox1.0.0.tar) && $(MOVE) `dirname .tmp/parabox1.0.0`/parabox1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/parabox1.0.0
 
 
 clean:compiler_clean 
 	-$(DEL_FILE) $(OBJECTS)
-	-$(DEL_FILE) *.vuonode
+	-$(DEL_FILE) *.vuonode *.bc
 	-$(DEL_FILE) *~ core *.core
 
 
@@ -363,35 +297,53 @@ distclean: clean
 
 check: first
 
-compiler_node_make_all: co.parabox.time.get.vuonode co.parabox.file.text.vuonode co.parabox.mesh.get.vuonode co.parabox.mesh.make.vuonode co.parabox.mesh.triangle.vuonode co.parabox.shader.make.graph.vuonode co.parabox.shader.make.glsl.vuonode co.parabox.list.average.vuonode co.parabox.event.drop.vuonode
+compiler_node_make_all: co.parabox.time.get.vuonode co.parabox.file.text.vuonode co.parabox.mesh.get.vuonode co.parabox.mesh.make.vuonode co.parabox.mesh.triangle.vuonode co.parabox.shader.make.graph.vuonode co.parabox.shader.make.glsl.vuonode co.parabox.list.average.vuonode co.parabox.list.bounds.vuonode co.parabox.utility.slider.vuonode co.parabox.event.drop.vuonode co.parabox.shader.make.uniform.vuonode
 compiler_node_clean:
-	-$(DEL_FILE) co.parabox.time.get.vuonode co.parabox.file.text.vuonode co.parabox.mesh.get.vuonode co.parabox.mesh.make.vuonode co.parabox.mesh.triangle.vuonode co.parabox.shader.make.graph.vuonode co.parabox.shader.make.glsl.vuonode co.parabox.list.average.vuonode co.parabox.event.drop.vuonode
+	-$(DEL_FILE) co.parabox.time.get.vuonode co.parabox.file.text.vuonode co.parabox.mesh.get.vuonode co.parabox.mesh.make.vuonode co.parabox.mesh.triangle.vuonode co.parabox.shader.make.graph.vuonode co.parabox.shader.make.glsl.vuonode co.parabox.list.average.vuonode co.parabox.list.bounds.vuonode co.parabox.utility.slider.vuonode co.parabox.event.drop.vuonode co.parabox.shader.make.uniform.vuonode
 co.parabox.time.get.vuonode: co.parabox.time.get.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.time.get.vuonode co.parabox.time.get.c && zip co.parabox.nodes.vuonode co.parabox.time.get.vuonode `basename co.parabox.time.get.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.time.get.vuonode co.parabox.time.get.c && zip co.parabox.nodes.vuonode co.parabox.time.get.vuonode `basename co.parabox.time.get.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
 
 co.parabox.file.text.vuonode: co.parabox.file.text.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.file.text.vuonode co.parabox.file.text.c && zip co.parabox.nodes.vuonode co.parabox.file.text.vuonode `basename co.parabox.file.text.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.file.text.vuonode co.parabox.file.text.c && zip co.parabox.nodes.vuonode co.parabox.file.text.vuonode `basename co.parabox.file.text.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
 
 co.parabox.mesh.get.vuonode: co.parabox.mesh.get.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.mesh.get.vuonode co.parabox.mesh.get.c && zip co.parabox.nodes.vuonode co.parabox.mesh.get.vuonode `basename co.parabox.mesh.get.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.mesh.get.vuonode co.parabox.mesh.get.c && zip co.parabox.nodes.vuonode co.parabox.mesh.get.vuonode `basename co.parabox.mesh.get.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
 
 co.parabox.mesh.make.vuonode: co.parabox.mesh.make.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.mesh.make.vuonode co.parabox.mesh.make.c && zip co.parabox.nodes.vuonode co.parabox.mesh.make.vuonode `basename co.parabox.mesh.make.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.mesh.make.vuonode co.parabox.mesh.make.c && zip co.parabox.nodes.vuonode co.parabox.mesh.make.vuonode `basename co.parabox.mesh.make.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
 
 co.parabox.mesh.triangle.vuonode: co.parabox.mesh.triangle.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.mesh.triangle.vuonode co.parabox.mesh.triangle.c && zip co.parabox.nodes.vuonode co.parabox.mesh.triangle.vuonode `basename co.parabox.mesh.triangle.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.mesh.triangle.vuonode co.parabox.mesh.triangle.c && zip co.parabox.nodes.vuonode co.parabox.mesh.triangle.vuonode `basename co.parabox.mesh.triangle.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
 
 co.parabox.shader.make.graph.vuonode: co.parabox.shader.make.graph.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.shader.make.graph.vuonode co.parabox.shader.make.graph.c && zip co.parabox.nodes.vuonode co.parabox.shader.make.graph.vuonode `basename co.parabox.shader.make.graph.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.shader.make.graph.vuonode co.parabox.shader.make.graph.c && zip co.parabox.nodes.vuonode co.parabox.shader.make.graph.vuonode `basename co.parabox.shader.make.graph.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
 
 co.parabox.shader.make.glsl.vuonode: co.parabox.shader.make.glsl.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.shader.make.glsl.vuonode co.parabox.shader.make.glsl.c && zip co.parabox.nodes.vuonode co.parabox.shader.make.glsl.vuonode `basename co.parabox.shader.make.glsl.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.shader.make.glsl.vuonode co.parabox.shader.make.glsl.c && zip co.parabox.nodes.vuonode co.parabox.shader.make.glsl.vuonode `basename co.parabox.shader.make.glsl.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
 
 co.parabox.list.average.vuonode: co.parabox.list.average.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.list.average.vuonode co.parabox.list.average.c && zip co.parabox.nodes.vuonode co.parabox.list.average.vuonode `basename co.parabox.list.average.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.list.average.vuonode co.parabox.list.average.c && zip co.parabox.nodes.vuonode co.parabox.list.average.vuonode `basename co.parabox.list.average.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
+
+co.parabox.list.bounds.vuonode: co.parabox.list.bounds.c
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.list.bounds.vuonode co.parabox.list.bounds.c && zip co.parabox.nodes.vuonode co.parabox.list.bounds.vuonode `basename co.parabox.list.bounds.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
+
+co.parabox.utility.slider.vuonode: co.parabox.utility.slider.c
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.utility.slider.vuonode co.parabox.utility.slider.c && zip co.parabox.nodes.vuonode co.parabox.utility.slider.vuonode `basename co.parabox.utility.slider.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
 
 co.parabox.event.drop.vuonode: co.parabox.event.drop.c
-	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.event.drop.vuonode co.parabox.event.drop.c && zip co.parabox.nodes.vuonode co.parabox.event.drop.vuonode `basename co.parabox.event.drop.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.event.drop.vuonode co.parabox.event.drop.c && zip co.parabox.nodes.vuonode co.parabox.event.drop.vuonode `basename co.parabox.event.drop.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
+
+co.parabox.shader.make.uniform.vuonode: co.parabox.shader.make.uniform.c
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output co.parabox.shader.make.uniform.vuonode co.parabox.shader.make.uniform.c && zip co.parabox.nodes.vuonode co.parabox.shader.make.uniform.vuonode `basename co.parabox.shader.make.uniform.c` && mkdir -p ~/Library/Application\ Support/Vuo/Modules
+
+compiler_type_make_all: PbxShaderUniform.bc VuoList_PbxShaderUniform.bc
+compiler_type_clean:
+	-$(DEL_FILE) PbxShaderUniform.bc VuoList_PbxShaderUniform.bc
+PbxShaderUniform.bc: PbxShaderUniform.c
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output PbxShaderUniform.bc PbxShaderUniform.c && zip co.parabox.nodes.vuonode PbxShaderUniform.bc `basename PbxShaderUniform`.h && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
+
+VuoList_PbxShaderUniform.bc: VuoList_PbxShaderUniform.cc
+	~/sdk/vuo-1.0.0-sdk/framework/vuo-compile --output VuoList_PbxShaderUniform.bc VuoList_PbxShaderUniform.cc && zip co.parabox.nodes.vuonode VuoList_PbxShaderUniform.bc `basename VuoList_PbxShaderUniform`.h && mkdir -p ~/Library/Application\ Support/Vuo/Modules && cp co.parabox.nodes.vuonode ~/Library/Application\ Support/Vuo/Modules
 
 compiler_objective_c_make_all:
 compiler_objective_c_clean:
@@ -403,7 +355,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_node_clean 
+compiler_clean: compiler_node_clean compiler_type_clean 
 
 ####### Compile
 
