@@ -6,9 +6,8 @@ VuoModuleMetadata({
 					  "title" : "Make Graph",
 					  "keywords" : [ "waveform", "audio", "clipart" ],
 					  "version" : "1.0.0",
-					  "description": "Creates a graph image from a list of real values.\n\nIf maxValue is greater than 0, the the Y axis of the graph is plotted from 0 to maxValue, otherwise the largest point in the list is used."
+					  "description": "Creates a graph image from a list of real values.\n\nIf maxValue is greater than 0, the the Y axis of the graph is plotted from 0 to maxValue, otherwise the largest point in the list is used.",
 					  "node": {
-						  // "exampleCompositions" : [ ".vuo" ]
 					  }
 				 });
 
