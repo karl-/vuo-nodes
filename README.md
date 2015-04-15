@@ -20,6 +20,6 @@ Custom nodes for use with Vuo.
 
 ## To Use
 
-Place the `co.parabox.nodes.vuonode` file in your `User Modules` folder: `~/Library/Application\ Support/Vuo/Modules/`.
+Place the `co.parabox.nodes.vuonode` file (found in the bin folder) in your `User Modules` folder: `~/Library/Application\ Support/Vuo/Modules/`.
 
 The easiest way to find this folder to to open Vuo, then select `Tools > Open User Modules Folder`.
