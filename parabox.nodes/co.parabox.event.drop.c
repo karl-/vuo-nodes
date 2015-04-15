@@ -13,10 +13,10 @@
 #include <stdio.h>
 
 VuoModuleMetadata({
-					 "title" : "Drop Events",
-					 "keywords" : [ "the mic", "restrict", "bounce", "flow" ],
+					 "title" : "Decimate Events",
+					 "keywords" : [ "the mic", "restrict", "bounce", "flow", "siphon", "limit" ],
 					 "version" : "1.0.0",
-					 "description": "Passes a limited number events.",
+					 "description": "Passes one event for every X number of events received.",
 					 "node" : {
 						  "exampleCompositions" : [ "" ]
 					 }
