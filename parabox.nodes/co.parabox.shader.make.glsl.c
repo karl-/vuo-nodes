@@ -31,7 +31,13 @@ VuoModuleMetadata({
 struct nodeInstanceData
 {
 	VuoShader shader;
+	VuoText curVertexShader;
+	VuoText curFragShader;
 };
+
+const char *pointGeometryShaderSource = VUOSHADER_GLSL_SOURCE(120, include(trianglePoint));
+const char *lineGeometryShaderSource  = VUOSHADER_GLSL_SOURCE(120, include(triangleLine));
+
 
 struct nodeInstanceData * nodeInstanceInit(
 	VuoInputData(VuoText) vertexShader,
@@ -44,7 +50,16 @@ struct nodeInstanceData * nodeInstanceInit(
 	instance->shader = VuoShader_make("GLSL Shader");
 	VuoRetain(instance->shader);
 
+	instance->curVertexShader = NULL;
+	instance->curFragShader = NULL;
+
 	VuoShader_addSource(instance->shader, VuoMesh_IndividualTriangles, vertexShader, NULL, fragmentShader);
+	VuoShader_addSource(instance->shader, VuoMesh_LineStrip, vertexShader, lineGeometryShaderSource, fragmentShader);
+	VuoShader_addSource(instance->shader, VuoMesh_Points, vertexShader, pointGeometryShaderSource, fragmentShader);
+
+	VuoShader_setExpectedOutputPrimitiveCount(instance->shader, VuoMesh_Points, 2);
+	VuoShader_setExpectedOutputPrimitiveCount(instance->shader, VuoMesh_IndividualLines, 2);
+
 
 	return instance;
 }
@@ -82,8 +97,6 @@ void main(void)															\n\
 	gl_FragColor = color;												\n\
 }",
 			"isCodeEditor":true}) fragmentShader,
-		VuoInputEvent({"eventBlocking":"none","data":"vertexShader"}) vertexShaderEvent,
-		VuoInputEvent({"eventBlocking":"none","data":"fragmentShader"}) fragmentShaderEvent,
 		VuoInputData(VuoList_PbxShaderUniform) uniforms,
 		VuoOutputData(VuoShader) shader
 )
@@ -93,7 +106,7 @@ void main(void)															\n\
 	 *	@todo Maybe verify that the shader has successfully compiled before
 	 *	pushing it out?
 	 */
-	if(fragmentShaderEvent || vertexShaderEvent)
+	if( vertexShader != (*instance)->curVertexShader || fragmentShader != (*instance)->curFragShader )
 	{
 		if((*instance)->shader)
 		{
@@ -103,7 +116,15 @@ void main(void)															\n\
 		(*instance)->shader = VuoShader_make("GLSL Shader");
 		VuoRetain((*instance)->shader);
 
+		(*instance)->curVertexShader = vertexShader;
+		(*instance)->curFragShader = fragmentShader;
+
 		VuoShader_addSource((*instance)->shader, VuoMesh_IndividualTriangles, vertexShader, NULL, fragmentShader);
+		VuoShader_addSource((*instance)->shader, VuoMesh_IndividualLines, vertexShader, lineGeometryShaderSource, fragmentShader);
+		VuoShader_addSource((*instance)->shader, VuoMesh_Points, vertexShader, pointGeometryShaderSource, fragmentShader);
+
+		VuoShader_setExpectedOutputPrimitiveCount((*instance)->shader, VuoMesh_Points, 2);
+		VuoShader_setExpectedOutputPrimitiveCount((*instance)->shader, VuoMesh_IndividualLines, 2);
 	}
 
 	for(unsigned int i = 0; i < VuoListGetCount_PbxShaderUniform(uniforms); i++)
