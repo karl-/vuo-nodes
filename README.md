@@ -17,6 +17,7 @@ Custom nodes for use with Vuo.
 - `Get List Bounds` – Find the minimum and maximum values of a list.
 - `Generic Slider` – Scales a value from 0-1 to range of min/max.
 - `Decimate Events` – Allows only one event per-X number of events through.  Useful to siphon data down to samples every X number of events.
+- `Text Contains` – Returns true if `text` contains `value`, false otherwise.
 
 ## To Use
 
