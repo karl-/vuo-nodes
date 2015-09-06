@@ -10,6 +10,7 @@ NODE_SOURCES += \
 	co.parabox.shader.make.graph.c \
 	co.parabox.shader.make.glsl.c \
 	co.parabox.list.average.c \
+	co.parabox.text.contains.c \
 	co.parabox.list.bounds.c \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
@@ -17,7 +18,7 @@ NODE_SOURCES += \
 
 OTHER_FILES += $$NODE_SOURCES
 
-VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.0.0-sdk/framework
+VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 QMAKE_PRE_LINK += mkdir -p "$${VUO_USER_MODULES_PATH}"
 
@@ -42,7 +43,7 @@ HEADERS += \
 	PbxShaderUniform.h \
 	VuoList_PbxShaderUniform.h
 
-VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.0.0-sdk/framework
+VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 
 type.input = TYPE_SOURCES
