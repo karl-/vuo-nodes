@@ -8,6 +8,7 @@ NODE_SOURCES += \
 	co.parabox.mesh.make.c \
 	co.parabox.mesh.triangle.c \
 	co.parabox.shader.make.graph.c \
+	co.parabox.mesh.make.uvlines.c \
 	co.parabox.shader.make.glsl.c \
 	co.parabox.list.average.c \
 	co.parabox.text.contains.c \

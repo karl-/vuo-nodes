@@ -70,9 +70,9 @@ static VuoPoint4d colorAtPointWithRadius(const unsigned char* pixels,
 
 	unsigned int sampleCount = 0;
 
-	for(int y = clampi(pixelCoord.y-pixelRadius, 0, h); y <= clampi(pixelCoord.y+pixelRadius, 0, h); y++)
+	for(int y = clampi(pixelCoord.y-pixelRadius, 0, h-1); y <= clampi(pixelCoord.y+pixelRadius, 0, h-1); y++)
 	{
-		for(int x = clampi(pixelCoord.x-pixelRadius, 0, w); x <= clampi(pixelCoord.x+pixelRadius, 0, w); x++)
+		for(int x = clampi(pixelCoord.x-pixelRadius, 0, w-1); x <= clampi(pixelCoord.x+pixelRadius, 0, w-1); x++)
 		{
 			sampleCount++;
 
@@ -166,8 +166,8 @@ void nodeEvent
 
 	submesh.vertexCount = vertexCount;
 	submesh.positions = v;
-	submesh.normals = NULL;
-	submesh.tangents = c;
+	submesh.normals = c;
+	submesh.tangents = NULL;
 	submesh.bitangents = NULL;
 	submesh.textureCoordinates = NULL;
 	submesh.faceCullingMode = GL_BACK;
