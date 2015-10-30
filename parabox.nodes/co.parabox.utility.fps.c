@@ -26,6 +26,8 @@ struct nodeInstanceData
 	unsigned int index;
 	unsigned int size;
 	unsigned int capacity;
+
+	VuoReal lastEvent;
 };
 
 void resizeHistory(struct nodeInstanceData* instance, unsigned int newCapacity)
@@ -57,10 +59,10 @@ VuoReal averageHistory(struct nodeInstanceData* instance)
 {
 	VuoReal avg = 0;
 
-	for(unsigned int i = 1; i < instance->size; i++)
-		avg += (instance->history[i] - instance->history[i-1]);
+	for(unsigned int i = 0; i < instance->size; i++)
+		avg += instance->history[i];
 
-	return avg / (double) (instance->size - 1);
+	return avg / (double) MAX(instance->size, 1);
 }
 
 struct nodeInstanceData * nodeInstanceInit(
@@ -70,10 +72,12 @@ struct nodeInstanceData * nodeInstanceInit(
 	struct nodeInstanceData * instance = (struct nodeInstanceData *)malloc(sizeof(struct nodeInstanceData));
 	VuoRegister(instance, free);
 
-	instance->history = (VuoReal*) malloc(sizeof(VuoReal) * samples);
+	unsigned int initialSize = MIN(MAX(2, samples), 999);
+	instance->history = (VuoReal*) malloc(sizeof(VuoReal) * initialSize);
 	instance->size = 0;
 	instance->index = 0;
-	instance->capacity = samples;
+	instance->capacity = initialSize;
+	instance->lastEvent = -1;
 
 	return instance;
 }
@@ -82,6 +86,7 @@ void nodeInstanceEvent(
 	VuoInstanceData(struct nodeInstanceData*) instance,
 	VuoInputEvent({"eventBlocking":"none"}) addTick,
 	VuoInputData(VuoInteger, {"default":15, "suggestedMin":2, "suggestedMax":60}) samples,
+	VuoInputEvent({"eventBlocking":"none"}) reset,
 	VuoOutputData(VuoReal) fps
 )
 {
@@ -92,13 +97,28 @@ void nodeInstanceEvent(
 
 	if(addTick)
 	{
-		unsigned int index = (*instance)->index % (*instance)->capacity;
-		(*instance)->history[index] = VuoLogGetTime();
-		(*instance)->index++;
-		(*instance)->size = MAX((*instance)->size, index);
+		VuoReal time = VuoLogGetTime();
+		VuoReal delta = time - (*instance)->lastEvent;
+
+		if((*instance)->lastEvent > 0)
+		{
+			unsigned int index = (*instance)->index % (*instance)->capacity;
+			(*instance)->history[index] = time - (*instance)->lastEvent;
+			(*instance)->index = index + 1;
+			(*instance)->size = MAX((*instance)->size, index);
+		}
+
+		(*instance)->lastEvent = time;
 	}
 
-	*fps = averageHistory(*instance);
+	if(reset)
+	{
+		(*instance)->size = 0;
+		(*instance)->index = 0;
+		(*instance)->lastEvent = -1;
+	}
+
+	*fps = 1. / averageHistory(*instance);
 }
 
 
