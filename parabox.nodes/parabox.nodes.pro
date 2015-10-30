@@ -8,11 +8,13 @@ NODE_SOURCES += \
 	co.parabox.mesh.make.c \
 	co.parabox.mesh.triangle.c \
 	co.parabox.shader.make.graph.c \
+	co.parabox.mesh.make.normals.c \
 	co.parabox.mesh.make.uvlines.c \
 	co.parabox.shader.make.glsl.c \
 	co.parabox.list.average.c \
 	co.parabox.text.contains.c \
 	co.parabox.list.bounds.c \
+	co.parabox.utility.fps.c \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
 	co.parabox.shader.make.uniform.c
