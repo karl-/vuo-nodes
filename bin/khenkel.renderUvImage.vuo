@@ -1,0 +1,61 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2015 [khenkel](https://vuo.org/user/32)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+GetMeshValues [type="co.parabox.mesh.get" version="2.0.0" label="Get Mesh Values|<refresh>refresh\l|<object>object\l|<positions>positions\r|<elements>elements\r|<normals>normals\r|<tangents>tangents\r|<bitangents>bitangents\r|<textures>textures\r" pos="375,315"];
+Make3DObject [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="1020,525" _transform="{\"translation\":[-0.5,-0.5,0],\"eulerRotation\":[0,0,0],\"scale\":[1,1,1]}"];
+Make3DObject2 [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="855,765"];
+MakeLineMesh2 [type="vuo.mesh.make.lines.VuoPoint2d" version="2.1.0" label="Make Line Mesh|<refresh>refresh\l|<positions>positions\l|<lineWidth>lineWidth\l|<mesh>mesh\r" pos="360,525" _lineWidth="0.001"];
+MakeLineMesh5 [type="vuo.mesh.make.lines.VuoPoint2d" version="2.1.0" label="Make Line Mesh|<refresh>refresh\l|<positions>positions\l|<lineWidth>lineWidth\l|<mesh>mesh\r" pos="630,765" _lineWidth="0.01"];
+MakeList25 [type="vuo.list.make.8.VuoPoint2d" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<4>4\l|<5>5\l|<6>6\l|<7>7\l|<8>8\l|<list>list\r" pos="563,776" _1="{\"x\":-0.5,\"y\":1}" _2="{\"x\":-0.5,\"y\":-1}" _3="{\"x\":-1,\"y\":-0.5}" _4="{\"x\":1,\"y\":-0.5}" _5="{\"x\":0.5,\"y\":-1}" _6="{\"x\":0.5,\"y\":1}" _7="{\"x\":1,\"y\":0.5}" _8="{\"x\":-1,\"y\":0.5}"];
+MakeList31 [type="vuo.list.make.3.VuoLayer" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<3>3\l|<list>list\r" pos="1430,131"];
+MakeList4 [type="vuo.list.make.1.PbxShaderUniform" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="614,581"];
+MakeList5 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="860,131"];
+MakeList9 [type="vuo.list.make.1.PbxShaderUniform" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="584,701"];
+MakeScaledLayer2 [type="vuo.layer.make" version="2.0.0" label="Make Scaled Layer|<refresh>refresh\l|<name>name\l|<image>image\l|<center>center\l|<rotation>rotation\l|<width>width\l|<opacity>opacity\l|<layer>layer\r" pos="1215,105" _center="{\"x\":0.0,\"y\":0.0}" _rotation="0.0" _width="2.0" _opacity="1.0"];
+MakeShaderUniform2 [type="co.parabox.shader.make.uniform.VuoColor" version="1.0.0" label="Make Shader Uniform|<refresh>refresh\l|<name>name\l|<value>value\l|<uniform>uniform\r" pos="570,30" _name="\"color\""];
+MakeShaderUniform3 [type="co.parabox.shader.make.uniform.VuoColor" version="1.0.0" label="Make Shader Uniform|<refresh>refresh\l|<name>name\l|<value>value\l|<uniform>uniform\r" pos="240,690" _name="\"color\"" _value="{\"r\":1,\"g\":0,\"b\":0.92036318778991699,\"a\":1}"];
+MakeShaderWithGLSL2 [type="co.parabox.shader.make.glsl" version="2.1.0" label="Make Shader with GLSL|<refresh>refresh\l|<vertexShader>vertexShader\l|<fragmentShader>fragmentShader\l|<uniforms>uniforms\l|<shader>shader\r" pos="630,660" _vertexShader="\"#version 120\\ninclude(VuoGlslProjection)\\n\\n\\/\\/ Built-in uniforms and attributes\\nuniform mat4 modelviewMatrix;\\n\\/\\/ uniform mat4 modelviewMatrixInverse;\\n\\nattribute vec4 position;\\n\\/\\/ attribute vec4 normal;\\n\\/\\/ attribute vec4 tangent;\\n\\/\\/ attribute vec4 bitangent;\\nattribute vec4 textureCoordinate;\\n\\n\\/\\/ Default output\\n\\/\\/ varying vec4 outPosition;\\n\\/\\/ varying vec4 outNormal;\\n\\/\\/ varying vec4 outTangent;\\n\\/\\/ varying vec4 outBitangent;\\n varying vec4 outTextureCoordinate;\\n\\nvoid main(void)\\n{\\n\\toutTextureCoordinate = textureCoordinate;\\n \\tgl_Position = VuoGlsl_projectPosition(modelviewMatrix * position);\\n}\\n\"" _fragmentShader="\"#version 120\\n\\nuniform vec4 color;\\n\\n\\/\\/ varying vec4 outPosition;\\n\\/\\/ varying vec4 outNormal;\\n\\/\\/ varying vec4 outTangent;\\n\\/\\/ varying vec4 outBitangent;\\nvarying vec4 outTextureCoordinate;\\n\\nvoid main(void)\\n{\\n\\tgl_FragColor = color;\\n}\""];
+MakeShaderWithGLSL3 [type="co.parabox.shader.make.glsl" version="2.1.0" label="Make Shader with GLSL|<refresh>refresh\l|<vertexShader>vertexShader\l|<fragmentShader>fragmentShader\l|<uniforms>uniforms\l|<shader>shader\r" pos="660,540" _vertexShader="\"#version 120\\ninclude(VuoGlslProjection)\\n\\n\\/\\/ Built-in uniforms and attributes\\nuniform mat4 modelviewMatrix;\\n\\/\\/ uniform mat4 modelviewMatrixInverse;\\n\\nattribute vec4 position;\\n\\/\\/ attribute vec4 normal;\\n\\/\\/ attribute vec4 tangent;\\n\\/\\/ attribute vec4 bitangent;\\nattribute vec4 textureCoordinate;\\n\\n\\/\\/ Default output\\n\\/\\/ varying vec4 outPosition;\\n\\/\\/ varying vec4 outNormal;\\n\\/\\/ varying vec4 outTangent;\\n\\/\\/ varying vec4 outBitangent;\\n varying vec4 outTextureCoordinate;\\n\\nvoid main(void)\\n{\\n\\toutTextureCoordinate = textureCoordinate;\\n \\tgl_Position = VuoGlsl_projectPosition(modelviewMatrix * position);\\n}\\n\"" _fragmentShader="\"#version 120\\n\\nuniform vec4 color;\\n\\n\\/\\/ varying vec4 outPosition;\\n\\/\\/ varying vec4 outNormal;\\n\\/\\/ varying vec4 outTangent;\\n\\/\\/ varying vec4 outBitangent;\\nvarying vec4 outTextureCoordinate;\\n\\nvoid main(void)\\n{\\n\\tgl_FragColor = color;\\n}\""];
+MakeTextLayer [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="1230,240" _text="\"(0,0)\"" _font="{\"fontName\":\"HelveticaNeue-Light\",\"pointSize\":28}" _center="{\"x\":-0.56999999284744263,\"y\":-0.55000001192092896}"];
+MakeTextLayer2 [type="vuo.layer.make.text" version="1.0.0" label="Make Text Layer|<refresh>refresh\l|<text>text\l|<font>font\l|<center>center\l|<layer>layer\r" pos="1230,330" _text="\"(1,1)\"" _font="{\"fontName\":\"HelveticaNeue-Light\",\"pointSize\":28}" _center="{\"x\":0.56999999284744263,\"y\":0.55000001192092896}"];
+MakeUVLineSegments [type="co.parabox.mesh.make.uvlines" version="2.0.0" label="Make UV Line Segments|<refresh>refresh\l|<textures>textures\l|<elements>elements\l|<lineSegments>lineSegments\r" pos="540,345"];
+RenderLayersToImage [type="vuo.layer.render.image" version="1.2.0" label="Render Layers to Image|<refresh>refresh\l|<layers>layers\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<image>image\r|<renderedLayers>renderedLayers\r" pos="1500,120" _width="1024" _height="1024" _colorDepth="\"8bpc\"" _multisampling="\"off\""];
+RenderSceneToImage [type="vuo.scene.render.image" version="1.1.0" label="Render Scene to Image|<refresh>refresh\l|<objects>objects\l|<width>width\l|<height>height\l|<colorDepth>colorDepth\l|<multisampling>multisampling\l|<cameraName>cameraName\l|<image>image\r|<depthImage>depthImage\r" pos="930,120" _width="1024" _height="1024" _colorDepth="\"8bpc\"" _multisampling="\"2\""];
+PublishedInputs [type="vuo.in" label="PublishedInputs|<SceneObject>SceneObject\r|<Color>Color\r" _SceneObject_type="VuoSceneObject" _SceneObject="null" _Color_type="VuoColor" _Color="{\"r\":1,\"g\":1,\"b\":1,\"a\":1}"];
+PublishedOutputs [type="vuo.out" label="PublishedOutputs|<Image>Image\l" _Image_type="VuoImage"];
+
+GetMeshValues:elements -> MakeUVLineSegments:elements;
+GetMeshValues:textures -> MakeUVLineSegments:textures;
+Make3DObject2:object -> MakeList5:2;
+Make3DObject:object -> MakeList5:1;
+MakeLineMesh2:mesh -> Make3DObject:mesh;
+MakeLineMesh5:mesh -> Make3DObject2:mesh;
+MakeList25:list -> MakeLineMesh5:positions;
+MakeList31:list -> RenderLayersToImage:layers;
+MakeList4:list -> MakeShaderWithGLSL3:uniforms;
+MakeList5:list -> RenderSceneToImage:objects;
+MakeList9:list -> MakeShaderWithGLSL2:uniforms;
+MakeScaledLayer2:layer -> MakeList31:1;
+MakeShaderUniform2:uniform -> MakeList4:1;
+MakeShaderUniform3:uniform -> MakeLineMesh5:refresh;
+MakeShaderUniform3:uniform -> MakeList9:1;
+MakeShaderWithGLSL2:shader -> Make3DObject2:shader;
+MakeShaderWithGLSL3:shader -> Make3DObject:shader;
+MakeTextLayer2:layer -> MakeList31:3;
+MakeTextLayer:layer -> MakeList31:2;
+MakeUVLineSegments:lineSegments -> MakeLineMesh2:positions;
+PublishedInputs:Color -> MakeShaderUniform2:value;
+PublishedInputs:SceneObject -> GetMeshValues:object;
+PublishedInputs:SceneObject -> MakeShaderUniform3:refresh;
+RenderLayersToImage:image -> PublishedOutputs:Image;
+RenderSceneToImage:image -> MakeScaledLayer2:image;
+RenderSceneToImage:image -> MakeTextLayer2:refresh;
+RenderSceneToImage:image -> MakeTextLayer:refresh;
+}

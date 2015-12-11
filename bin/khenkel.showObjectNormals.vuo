@@ -1,0 +1,32 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2015 [khenkel](https://vuo.org/user/32)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+FireOnStart [type="vuo.event.fireOnStart" version="1.0.0" label="Fire on Start|<refresh>refresh\l|<started>started\r" pos="150,0" _started_eventThrottling="enqueue"];
+Get3dObjectLocalTransform [type="co.parabox.scene.get.transform" version="1.0.0" label="Get 3d Object Local Transform|<refresh>refresh\l|<sceneObject>sceneObject\l|<transform>transform\r" pos="465,255"];
+GetMeshValues [type="co.parabox.mesh.get" version="2.0.0" label="Get Mesh Values|<refresh>refresh\l|<object>object\l|<positions>positions\r|<elements>elements\r|<normals>normals\r|<tangents>tangents\r|<bitangents>bitangents\r|<textures>textures\r" pos="195,135"];
+Make3DObject [type="vuo.scene.make" version="2.0.0" label="Make 3D Object|<refresh>refresh\l|<mesh>mesh\l|<shader>shader\l|<transform>transform\l|<object>object\r" pos="735,150"];
+MakeList6 [type="vuo.list.make.0.PbxShaderUniform" version="2.0.0" label="Make List|<refresh>refresh\l|<list>list\r" pos="394,71"];
+MakeNormalsLineMesh [type="co.parabox.mesh.make.normals" version="2.0.0" label="Make Normals Line Mesh|<refresh>refresh\l|<positions>positions\l|<normals>normals\l|<length>length\l|<lineMesh>lineMesh\r" pos="435,150"];
+MakeShaderWithGLSL3 [type="co.parabox.shader.make.glsl" version="2.1.0" label="Make Shader with GLSL|<refresh>refresh\l|<vertexShader>vertexShader\l|<fragmentShader>fragmentShader\l|<uniforms>uniforms\l|<shader>shader\r" pos="435,30" _vertexShader="\"#version 120\\ninclude(VuoGlslProjection)\\n\\n\\/\\/ Built-in uniforms and attributes\\nuniform mat4 modelviewMatrix;\\nuniform mat4 modelviewMatrixInverse;\\n\\nattribute vec4 position;\\nattribute vec4 normal;\\n\\/\\/ attribute vec4 tangent;\\n\\/\\/ attribute vec4 bitangent;\\n\\/\\/ attribute vec4 textureCoordinate;\\n\\n\\/\\/ Default output\\n\\/\\/ varying vec4 outPosition;\\nvarying vec4 outNormal;\\n\\/\\/ varying vec4 outTangent;\\n\\/\\/ varying vec4 outBitangent;\\n\\/\\/ varying vec4 outTextureCoordinate;\\n\\nvoid main(void)\\n{\\n\\toutNormal = normal;\\n \\tgl_Position = VuoGlsl_projectPosition(modelviewMatrix * position);\\n}\\n\"" _fragmentShader="\"#version 120\\n\\nvarying vec4 outNormal;\\n\\nvoid main(void)\\n{\\n\\tgl_FragColor = vec4(abs(outNormal).xyz, 1);\\n}\""];
+PublishedInputs [type="vuo.in" label="PublishedInputs|<Object>Object\r|<Length>Length\r" _Object_type="VuoSceneObject" _Object="null" _Length_type="VuoReal" _Length="0.1" _Length_suggestedMin="0.001" _Length_suggestedMax="1" _Length_suggestedStep="0.01"];
+PublishedOutputs [type="vuo.out" label="PublishedOutputs|<Object>Object\l" _Object_type="VuoSceneObject"];
+
+FireOnStart:started -> MakeShaderWithGLSL3:refresh;
+Get3dObjectLocalTransform:transform -> Make3DObject:transform;
+GetMeshValues:normals -> MakeNormalsLineMesh:normals;
+GetMeshValues:positions -> MakeNormalsLineMesh:positions;
+Make3DObject:object -> PublishedOutputs:Object;
+MakeList6:list -> MakeShaderWithGLSL3:uniforms;
+MakeNormalsLineMesh:lineMesh -> Make3DObject:mesh;
+MakeShaderWithGLSL3:shader -> Make3DObject:shader;
+PublishedInputs:Length -> MakeNormalsLineMesh:length;
+PublishedInputs:Object -> Get3dObjectLocalTransform:sceneObject;
+PublishedInputs:Object -> GetMeshValues:object;
+}

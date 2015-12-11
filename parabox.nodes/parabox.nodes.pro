@@ -14,14 +14,19 @@ NODE_SOURCES += \
 	co.parabox.list.average.c \
 	co.parabox.text.contains.c \
 	co.parabox.list.bounds.c \
+	co.parabox.texture.warp.c \
 	co.parabox.utility.fps.c \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
+	co.parabox.scene.get.transform.c \
+	co.parabox.points.triangulate.c \
 	co.parabox.shader.make.uniform.c
+#	triangulate/Delaunay.cc
 
 OTHER_FILES += $$NODE_SOURCES
 
-VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
+#VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
+VUO_FRAMEWORK_PATH = ~/vuo/trunk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 QMAKE_PRE_LINK += mkdir -p "$${VUO_USER_MODULES_PATH}"
 
@@ -38,13 +43,16 @@ QMAKE_CLEAN = *.vuonode
 
 TYPE_SOURCES += \
 	PbxShaderUniform.c \
-	VuoList_PbxShaderUniform.cc
+	PbxTriangulator.cc \
+	VuoList_PbxShaderUniform.cc \
 
 OTHER_FILES += $$TYPE_SOURCES
 
 HEADERS += \
 	PbxShaderUniform.h \
-	VuoList_PbxShaderUniform.h
+	PbxTriangulator.h \
+	VuoList_PbxShaderUniform.h \
+	Delauney.h
 
 VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules

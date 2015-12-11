@@ -54,8 +54,8 @@ struct nodeInstanceData * nodeInstanceInit(
 	instance->curFragShader = NULL;
 
 	VuoShader_addSource(instance->shader, VuoMesh_IndividualTriangles, vertexShader, NULL, fragmentShader);
-	VuoShader_addSource(instance->shader, VuoMesh_LineStrip, vertexShader, lineGeometryShaderSource, fragmentShader);
-	VuoShader_addSource(instance->shader, VuoMesh_Points, vertexShader, pointGeometryShaderSource, fragmentShader);
+	VuoShader_addSource(instance->shader, VuoMesh_LineStrip, vertexShader, NULL, fragmentShader);
+	VuoShader_addSource(instance->shader, VuoMesh_Points, vertexShader, NULL, fragmentShader);
 
 	VuoShader_setExpectedOutputPrimitiveCount(instance->shader, VuoMesh_Points, 2);
 	VuoShader_setExpectedOutputPrimitiveCount(instance->shader, VuoMesh_IndividualLines, 2);
@@ -134,8 +134,8 @@ void main(void)\n\
 		(*instance)->curFragShader = fragmentShader;
 
 		VuoShader_addSource((*instance)->shader, VuoMesh_IndividualTriangles, vertexShader, NULL, fragmentShader);
-		VuoShader_addSource((*instance)->shader, VuoMesh_IndividualLines, vertexShader, lineGeometryShaderSource, fragmentShader);
-		VuoShader_addSource((*instance)->shader, VuoMesh_Points, vertexShader, pointGeometryShaderSource, fragmentShader);
+		VuoShader_addSource((*instance)->shader, VuoMesh_IndividualLines, vertexShader, NULL, fragmentShader);
+		VuoShader_addSource((*instance)->shader, VuoMesh_Points, vertexShader, NULL, fragmentShader);
 
 		VuoShader_setExpectedOutputPrimitiveCount((*instance)->shader, VuoMesh_Points, 2);
 		VuoShader_setExpectedOutputPrimitiveCount((*instance)->shader, VuoMesh_IndividualLines, 2);

@@ -117,11 +117,6 @@ static void addSamples(struct nodeInstanceData* instance, VuoList_VuoGenericType
 		instance->index = 0;
 }
 
-static VuoInteger VuoInteger_multiply(VuoInteger lhs, VuoReal rhs)
-{
-	return (long) lhs * rhs;
-}
-
 static VuoList_VuoGenericType1 getAverage(struct nodeInstanceData* instance)
 {
 	VuoList_VuoGenericType1 list = VuoListCreate_VuoGenericType1();

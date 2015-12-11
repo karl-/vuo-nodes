@@ -9,6 +9,7 @@
 
 #include "node.h"
 #include <stdio.h>
+#include <time.h>
 
 VuoModuleMetadata({
 					 "title" : "Get Date and Time",

@@ -1,0 +1,34 @@
+/**
+ * @file
+ * This composition does...
+ *
+ * @copyright Copyright © 2015 [khenkel](https://vuo.org/user/32)
+ * @see This is a Vuo Composition source code file.  See http://vuo.org for further information.
+ */
+
+digraph G
+{
+ChangeAllShaders [type="vuo.scene.shader.all" version="2.0.0" label="Change All Shaders|<refresh>refresh\l|<object>object\l|<shader>shader\l|<shadedObject>shadedObject\r" pos="315,150"];
+Combine3DObjects [type="vuo.scene.combine" version="1.0.0" label="Combine 3D Objects|<refresh>refresh\l|<transform>transform\l|<childObjects>childObjects\l|<object>object\r" pos="570,120"];
+Copy3DObjectWithTransforms [type="vuo.scene.copy" version="2.0.2" label="Copy 3D Object with Transforms|<refresh>refresh\l|<object>object\l|<transforms>transforms\l|<copies>copies\r" pos="45,90"];
+MakeList2 [type="vuo.list.make.1.VuoTransform" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<list>list\r" pos="-1,116" _1="{\"translation\":[0,0,0],\"eulerRotation\":[0,0,0],\"scale\":[1.0049999952316284,1.0049999952316284,1.0049999952316284]}"];
+MakeList3 [type="vuo.list.make.2.VuoSceneObject" version="2.0.0" label="Make List|<refresh>refresh\l|<1>1\l|<2>2\l|<list>list\r" pos="524,146"];
+SelectInput2 [type="vuo.select.in.boolean.VuoSceneObject" version="2.0.0" label="Select Input|<refresh>refresh\l|<which>which\l|<falseOption>falseOption\l|<trueOption>trueOption\l|<out>out\r" pos="540,-30"];
+ShadeWithWireframe [type="vuo.shader.make.wireframe" version="1.0.0" label="Shade with Wireframe|<refresh>refresh\l|<frontColor>frontColor\l|<backColor>backColor\l|<width>width\l|<standoffWidth>standoffWidth\l|<showThirdEdge>showThirdEdge\l|<shader>shader\r" pos="105,210" _backColor="{\"r\":0.75173568725585938,\"g\":1,\"b\":0.7600366473197937,\"a\":0}" _width="0.014999999999999999" _standoffWidth="0" _showThirdEdge="true"];
+PublishedInputs [type="vuo.in" label="PublishedInputs|<Object>Object\r|<WireColor>WireColor\r|<ShowWireframe>ShowWireframe\r" _Object_type="VuoSceneObject" _Object="null" _WireColor_type="VuoColor" _WireColor="{\"r\":0,\"g\":0.98744183778762817,\"b\":1,\"a\":1}" _ShowWireframe_type="VuoBoolean" _ShowWireframe="true"];
+PublishedOutputs [type="vuo.out" label="PublishedOutputs|<Object>Object\l" _Object_type="VuoSceneObject"];
+
+ChangeAllShaders:shadedObject -> MakeList3:2;
+Combine3DObjects:object -> SelectInput2:trueOption;
+Copy3DObjectWithTransforms:copies -> ChangeAllShaders:object;
+MakeList2:list -> Copy3DObjectWithTransforms:transforms;
+MakeList3:list -> Combine3DObjects:childObjects;
+PublishedInputs:Object -> Copy3DObjectWithTransforms:object;
+PublishedInputs:Object -> MakeList3:1;
+PublishedInputs:Object -> SelectInput2:falseOption;
+PublishedInputs:Object -> ShadeWithWireframe:refresh;
+PublishedInputs:ShowWireframe -> SelectInput2:which;
+PublishedInputs:WireColor -> ShadeWithWireframe:frontColor;
+SelectInput2:out -> PublishedOutputs:Object;
+ShadeWithWireframe:shader -> ChangeAllShaders:shader;
+}

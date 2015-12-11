@@ -98,14 +98,17 @@ void nodeEvent
 		VuoInputData(VuoImage) image,
 		VuoInputData(VuoInteger, { "default":32 }) subdivisions,
 		VuoInputData(VuoInteger, {"default":2, "suggestedMin":0, "suggestedMax":32}) pixelRadius,
-		VuoInputData(VuoPoint2d, {"default":{"x":640, "y":480} }) imageSize,
 		VuoOutputData(VuoMesh) mesh
 )
 {
-	// copy image pixels to buf
-	unsigned char* pixels = VuoImage_copyBuffer(image, GL_RGBA);
+	/// vuo 1.2 deprecates VuoImage_copyBuffer in favor of getBuffer, which returns a pointer
+	/// to VuoImage owned data.  Don't free this.
+	const unsigned char* pixels = VuoImage_getBuffer(image, GL_RGBA);
 
-	float w = imageSize.x, h = imageSize.y;
+	float	w = 1,
+			h = (float)image->pixelsHigh / (float)image->pixelsWide,
+			w2 = w/2,
+			h2 = h/2;
 	float xsegs = subdivisions;
 	float ysegs = (int)((h/w) * xsegs);
 
@@ -115,15 +118,17 @@ void nodeEvent
 	VuoPoint4d* v = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * vertexCount);
 	VuoPoint4d* c = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * vertexCount);	// store color data in tangents channel
 	unsigned int* indices = (unsigned int*)malloc(sizeof(unsigned int) * vertexCount);
+	VuoPoint2d cola_pos = VuoPoint2d_make(0,0);
+	VuoPoint2d colb_pos = VuoPoint2d_make(0,0);
 
 	for(int y = 0; y < ysegs; y++)
 	{
 		for(int x = 0; x < xsegs; x++)
 		{
-			VuoPoint4d v0 = (VuoPoint4d) { (x/xsegs) * w, (y/ysegs) * h, 0, 1 };
-			VuoPoint4d v1 = (VuoPoint4d) { ((x+1)/xsegs) * w, (y/ysegs) * h, 0, 1 };
-			VuoPoint4d v2 = (VuoPoint4d) { (x/xsegs) * w, ((y+1)/ysegs) * h, 0, 1 };
-			VuoPoint4d v3 = (VuoPoint4d) { ((x+1)/xsegs) * w, ((y+1)/ysegs) * h, 0, 1 };
+			VuoPoint4d v0 = (VuoPoint4d) { (x/xsegs) * w - w2, (y/ysegs) * h - h2, 0, 1 };
+			VuoPoint4d v1 = (VuoPoint4d) { ((x+1)/xsegs) * w - w2, (y/ysegs) * h - h2, 0, 1 };
+			VuoPoint4d v2 = (VuoPoint4d) { (x/xsegs) * w - w2, ((y+1)/ysegs) * h - h2, 0, 1 };
+			VuoPoint4d v3 = (VuoPoint4d) { ((x+1)/xsegs) * w - w2, ((y+1)/ysegs) * h - h2, 0, 1 };
 
 			v[i+0] = v0;
 			v[i+1] = v1;
@@ -133,13 +138,11 @@ void nodeEvent
 			v[i+4] = v3;
 			v[i+5] = v2;
 
-			VuoPoint2d cola_pos = VuoPoint2d_make(
-						(v0.x + v1.x + v2.x) * .3333,
-						(v0.y + v1.y + v2.y) * .3333 );
+			cola_pos.x = x/xsegs;
+			cola_pos.y = y/ysegs;
 
-			VuoPoint2d colb_pos = VuoPoint2d_make(
-						(v3.x + v1.x + v2.x) * .3333,
-						(v3.y + v1.y + v2.y) * .3333 );
+			colb_pos.x = (x+1)/xsegs;
+			colb_pos.y = (y+1)/ysegs;
 
 			VuoPoint4d cola = colorAtPointWithRadius(pixels, image, cola_pos, pixelRadius);
 			VuoPoint4d colb = colorAtPointWithRadius(pixels, image, colb_pos, pixelRadius);
@@ -160,7 +163,7 @@ void nodeEvent
 	for(int i = 0; i < vertexCount; i++)
 		indices[i] = i;
 
-	free (pixels);
+//	free (pixels);
 
 	VuoSubmesh submesh;
 
