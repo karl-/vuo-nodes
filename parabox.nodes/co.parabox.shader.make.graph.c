@@ -97,7 +97,7 @@ void nodeInstanceEvent
 		pixels[n++] = (unsigned int)((amp/largest)*255);
 	}
 
-	VuoImage gradientStrip = VuoImage_makeFromBuffer(pixels, GL_RGBA, len, 1, VuoImageColorDepth_8, NULL);
+	VuoImage gradientStrip = VuoImage_makeFromBuffer(pixels, GL_RGBA, len, 1, VuoImageColorDepth_8, ^(void* buf) { free(buf); });
 
 	if(chartType == 0)
 	{

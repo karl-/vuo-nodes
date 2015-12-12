@@ -45,6 +45,9 @@ void GetMeshValues(	const VuoSceneObject* object,
 		{
 			VuoSubmesh* submesh = &mesh->submeshes[CurSubmesh];
 
+			if(submesh == NULL)
+				continue;
+
 			for(unsigned int CurIndex = 0; CurIndex < submesh->vertexCount; CurIndex++)
 			{
 				VuoPoint4d v = submesh->positions[CurIndex];

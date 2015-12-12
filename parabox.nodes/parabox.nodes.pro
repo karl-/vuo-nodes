@@ -19,7 +19,7 @@ NODE_SOURCES += \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
 	co.parabox.scene.get.transform.c \
-	co.parabox.points.triangulate.c \
+#	co.parabox.points.triangulate.c \
 	co.parabox.shader.make.uniform.c
 #	triangulate/Delaunay.cc
 
@@ -43,14 +43,14 @@ QMAKE_CLEAN = *.vuonode
 
 TYPE_SOURCES += \
 	PbxShaderUniform.c \
-	PbxTriangulator.cc \
-	VuoList_PbxShaderUniform.cc \
+#	PbxTriangulator.cc \
+	VuoList_PbxShaderUniform.cc
 
 OTHER_FILES += $$TYPE_SOURCES
 
 HEADERS += \
 	PbxShaderUniform.h \
-	PbxTriangulator.h \
+#	PbxTriangulator.h \
 	VuoList_PbxShaderUniform.h \
 	Delauney.h
 
