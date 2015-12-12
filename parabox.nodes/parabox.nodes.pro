@@ -14,7 +14,7 @@ NODE_SOURCES += \
 	co.parabox.list.average.c \
 	co.parabox.text.contains.c \
 	co.parabox.list.bounds.c \
-	co.parabox.texture.warp.c \
+#	co.parabox.texture.warp.c \
 	co.parabox.utility.fps.c \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
