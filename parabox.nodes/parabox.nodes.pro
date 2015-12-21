@@ -19,13 +19,13 @@ NODE_SOURCES += \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
 	co.parabox.scene.get.transform.c \
+	co.parabox.scene.get.mesh.c \
 #	co.parabox.points.triangulate.c \
 	co.parabox.shader.make.uniform.c
 #	triangulate/Delaunay.cc
 
 OTHER_FILES += $$NODE_SOURCES
 
-#VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
 VUO_FRAMEWORK_PATH = ~/vuo/trunk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 QMAKE_PRE_LINK += mkdir -p "$${VUO_USER_MODULES_PATH}"
@@ -62,7 +62,8 @@ type.output = ${QMAKE_FILE_IN_BASE}.bc
 type.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
 	&& zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} `basename ${QMAKE_FILE_IN_BASE}`.h \
 	&& mkdir -p "$${VUO_USER_MODULES_PATH}" \
-	&& cp co.parabox.nodes.vuonode "$${VUO_USER_MODULES_PATH}"
+	&& cp co.parabox.nodes.vuonode "$${VUO_USER_MODULES_PATH}" \
+	&& cp co.parabox.nodes.vuonode ../bin
 QMAKE_EXTRA_COMPILERS += type
 
 QMAKE_CLEAN += *.bc

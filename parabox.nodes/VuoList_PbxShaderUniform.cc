@@ -135,6 +135,13 @@ VuoList_PbxShaderUniform VuoListCreate_PbxShaderUniform(void)
 	return reinterpret_cast<VuoList_PbxShaderUniform>(l);
 }
 
+VuoList_PbxShaderUniform VuoListCreateWithCount_PbxShaderUniform(const unsigned long count, const PbxShaderUniform value)
+{
+	std::vector<PbxShaderUniform> * l = new std::vector<PbxShaderUniform>(count);
+	VuoRegister(l, VuoListDestroy_PbxShaderUniform);
+	return reinterpret_cast<VuoList_PbxShaderUniform>(l);
+}
+
 VuoList_PbxShaderUniform VuoListCopy_PbxShaderUniform(const VuoList_PbxShaderUniform list)
 {
 	if (!list)
@@ -156,7 +163,9 @@ void VuoListDestroy_PbxShaderUniform(void *list)
 	if (!list)
 		return;
 
+#if 2 != 0
 	VuoListRemoveAll_PbxShaderUniform(reinterpret_cast<VuoList_PbxShaderUniform>(list));
+#endif
 
 	std::vector<PbxShaderUniform> * l = (std::vector<PbxShaderUniform> *)list;
 	delete l;
@@ -176,6 +185,16 @@ PbxShaderUniform VuoListGetValue_PbxShaderUniform(const VuoList_PbxShaderUniform
 		return (*l)[l->size()-1];
 
 	return (*l)[index-1];
+}
+
+PbxShaderUniform *VuoListGetData_PbxShaderUniform(const VuoList_PbxShaderUniform list)
+{
+	std::vector<PbxShaderUniform> * l = (std::vector<PbxShaderUniform> *)list;
+
+	if (!l || l->size() == 0)
+		return NULL;
+
+	return &((*l)[0]);
 }
 
 void VuoListSetValue_PbxShaderUniform(const VuoList_PbxShaderUniform list, const PbxShaderUniform value, const unsigned long index)
@@ -271,6 +290,58 @@ void VuoListExchangeValues_PbxShaderUniform(VuoList_PbxShaderUniform list, const
 	(*l)[clampedIndexA] = (*l)[clampedIndexB];
 	(*l)[clampedIndexB] = value;
 }
+
+#ifdef PbxShaderUniform_SUPPORTS_COMPARISON
+void VuoListSort_PbxShaderUniform(VuoList_PbxShaderUniform list)
+{
+	if (!list)
+		return;
+
+	std::vector<PbxShaderUniform> * l = (std::vector<PbxShaderUniform> *)list;
+
+	size_t size = l->size();
+	if (size < 2)
+		return;
+
+	std::sort(l->begin(), l->end(), PbxShaderUniform_isLessThan);
+}
+
+bool VuoList_PbxShaderUniform_areEqual(const VuoList_PbxShaderUniform _a, const VuoList_PbxShaderUniform _b)
+{
+	if (!_a || !_b)
+		return _a == _b;
+
+	std::vector<PbxShaderUniform> *a = (std::vector<PbxShaderUniform> *)_a;
+	std::vector<PbxShaderUniform> *b = (std::vector<PbxShaderUniform> *)_b;
+	if (a->size() != b->size())
+		return false;
+
+	for (std::vector<PbxShaderUniform>::iterator ia = a->begin(), ib = b->begin(); ia != a->end(); ++ia, ++ib)
+		if (!PbxShaderUniform_areEqual(*ia, *ib))
+			return false;
+
+	return true;
+}
+
+bool VuoList_PbxShaderUniform_isLessThan(const VuoList_PbxShaderUniform _a, const VuoList_PbxShaderUniform _b)
+{
+	if (!_a || !_b)
+		return _a < _b;
+
+	std::vector<PbxShaderUniform> *a = (std::vector<PbxShaderUniform> *)_a;
+	std::vector<PbxShaderUniform> *b = (std::vector<PbxShaderUniform> *)_b;
+	if (a->size() < b->size()) return true;
+	if (a->size() > b->size()) return false;
+
+	for (std::vector<PbxShaderUniform>::iterator ia = a->begin(), ib = b->begin(); ia != a->end(); ++ia, ++ib)
+	{
+		if (PbxShaderUniform_isLessThan(*ia, *ib)) return true;
+		if (PbxShaderUniform_isLessThan(*ib, *ia)) return false;
+	}
+
+	return false;
+}
+#endif
 
 void VuoListShuffle_PbxShaderUniform(VuoList_PbxShaderUniform list, const double chaos)
 {

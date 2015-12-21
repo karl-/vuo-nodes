@@ -35,6 +35,13 @@ typedef const struct VuoList_PbxShaderUniform_struct { void *l; } * VuoList_PbxS
 VuoList_PbxShaderUniform VuoListCreate_PbxShaderUniform(void);
 
 /**
+ * Creates a new list of `count` instances of `value`.
+ *
+ * Use this in conjunction with @ref VuoListGetData_PbxShaderUniform to quickly initialize a large list.
+ */
+VuoList_PbxShaderUniform VuoListCreateWithCount_PbxShaderUniform(const unsigned long count, const PbxShaderUniform value);
+
+/**
  * Makes a shallow copy of `list` — its items are retained (not copied) by the new list.
  */
 VuoList_PbxShaderUniform VuoListCopy_PbxShaderUniform(const VuoList_PbxShaderUniform list);
@@ -46,6 +53,24 @@ VuoList_PbxShaderUniform VuoListCopy_PbxShaderUniform(const VuoList_PbxShaderUni
  * Attempting to access an out-of-bounds index returns the first item in the list (if the index is 0), or last item in the list (if the index is greater than the list size).
  */
 PbxShaderUniform VuoListGetValue_PbxShaderUniform(const VuoList_PbxShaderUniform list, const unsigned long index);
+
+/**
+ * Returns a pointer to a C array containing the list items.
+ *
+ * Use this if you need a fast way to get or change multiple list items.
+ *
+ * You can modify values in the list by changing them in this array.
+ * Just don't attempt to access beyond the list size.
+ *
+ * The pointer becomes invalid if you modify the list size using other functions
+ * (e.g., Insert, Prepend, Append, Cut, Remove);
+ * if you use those functions, just get a new pointer by calling this function again.
+ *
+ * If the list has no items, returns NULL.
+ *
+ * The pointer remains owned by the list; don't free it.
+ */
+PbxShaderUniform *VuoListGetData_PbxShaderUniform(const VuoList_PbxShaderUniform list);
 
 /**
  * Changes the @ref PbxShaderUniform at @c index.
@@ -77,6 +102,25 @@ void VuoListAppendValue_PbxShaderUniform(VuoList_PbxShaderUniform list, const Pb
  * Swaps the value at `indexA` with the value at `indexB`.
  */
 void VuoListExchangeValues_PbxShaderUniform(VuoList_PbxShaderUniform list, const unsigned long indexA, const unsigned long indexB);
+
+#ifdef PbxShaderUniform_SUPPORTS_COMPARISON
+/**
+ * Sorts `list`.
+ */
+void VuoListSort_PbxShaderUniform(VuoList_PbxShaderUniform list);
+
+/**
+ * Returns true if the two lists are equivalent.
+ *
+ * NULL lists are never equal to non-NULL lists (even empty lists).
+ */
+bool VuoList_PbxShaderUniform_areEqual(const VuoList_PbxShaderUniform a, const VuoList_PbxShaderUniform b);
+
+/**
+ * Returns true if `a` < `b`.
+ */
+bool VuoList_PbxShaderUniform_isLessThan(const VuoList_PbxShaderUniform a, const VuoList_PbxShaderUniform b);
+#endif
 
 /**
  * Generates a random permutation of `list`.
