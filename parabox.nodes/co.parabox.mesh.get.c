@@ -25,7 +25,10 @@ VuoModuleMetadata({
 					 }
 				 });
 
-/// @todo smarter allocation of arrays.  this just calls std::list push_back a bunch.
+// forward declare because this isn't public for some reason
+void VuoSubmeshMesh_download(VuoSubmesh* submesh);
+
+// @todo better way to allocate arrays?
 void GetMeshValues(	const VuoSceneObject* object,
 					unsigned int vertexOffset,
 					VuoList_VuoPoint3d *positions,
@@ -47,6 +50,9 @@ void GetMeshValues(	const VuoSceneObject* object,
 
 			if(submesh == NULL)
 				continue;
+
+			if( submesh->positions == NULL )
+				VuoSubmeshMesh_download(submesh);
 
 			for(unsigned int CurIndex = 0; CurIndex < submesh->vertexCount; CurIndex++)
 			{
