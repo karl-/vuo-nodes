@@ -8,10 +8,10 @@
 #include "node.h"
 
 VuoModuleMetadata({
-					 "title" : "Get 3d Object Local Transform",
-					 "keywords" : [ "world", "model", "space" ],
+					 "title" : "Get 3d Object Transform",
+					 "keywords" : [ "world", "model", "space", "local" ],
 					 "version" : "1.0.0",
-					 "description": "",
+					 "description": "Get a scene object's local transform.  Note that this is not affected by parent transforms.",
 					 "dependencies" : [
 						 "VuoGlContext"
 					 ],

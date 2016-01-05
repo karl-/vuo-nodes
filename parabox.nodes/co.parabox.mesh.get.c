@@ -25,7 +25,8 @@ VuoModuleMetadata({
 					 }
 				 });
 
-// forward declare because this isn't public for some reason
+// forward declare because this isn't public in 1.2
+// @todo this function becomes VuoSubmesh_download in 1.3, update whenever that comes out
 void VuoSubmeshMesh_download(VuoSubmesh* submesh);
 
 // @todo better way to allocate arrays?
@@ -51,6 +52,7 @@ void GetMeshValues(	const VuoSceneObject* object,
 			if(submesh == NULL)
 				continue;
 
+			// if a geometry shader was used to transform the mesh positions can be null.
 			if( submesh->positions == NULL )
 				VuoSubmeshMesh_download(submesh);
 
