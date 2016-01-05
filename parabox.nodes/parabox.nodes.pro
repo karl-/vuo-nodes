@@ -2,6 +2,7 @@ TEMPLATE = aux
 cache()
 
 NODE_SOURCES += \
+	co.parabox.data.make.keyValuePair.c \
 	co.parabox.time.get.c \
 	co.parabox.file.text.c \
 	co.parabox.mesh.get.c \

@@ -25,9 +25,8 @@ VuoModuleMetadata({
 					 }
 				 });
 
-// forward declare because this isn't public in 1.2
-// @todo this function becomes VuoSubmesh_download in 1.3, update whenever that comes out
-void VuoSubmeshMesh_download(VuoSubmesh* submesh);
+// @todo vuo 1.3 will change this to VuoSubmesh_download
+void VuoSubmeshMesh_download(VuoSubmesh* submesh) __attribute((weak));
 
 // @todo better way to allocate arrays?
 void GetMeshValues(	const VuoSceneObject* object,
@@ -88,6 +87,11 @@ void GetMeshValues(	const VuoSceneObject* object,
 		VuoSceneObject obj = VuoListGetValue_VuoSceneObject(object->childObjects, i+1);
 		GetMeshValues(&obj, curIndex, positions, normals, tangents, bitangents, textures, elements);
 	}
+}
+
+void VuoSubmeshMesh_download(VuoSubmesh* submesh)
+{
+	VuoSubmesh_download(submesh);
 }
 
 void nodeEvent
