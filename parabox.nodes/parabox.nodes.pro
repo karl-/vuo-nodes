@@ -15,15 +15,16 @@ NODE_SOURCES += \
 	co.parabox.list.average.c \
 	co.parabox.text.contains.c \
 	co.parabox.list.bounds.c \
-#	co.parabox.texture.warp.c \
 	co.parabox.utility.fps.c \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
+	co.parabox.sceneObject.layer.c \
 	co.parabox.scene.get.transform.c \
+	co.parabox.layer.make.material.c \
 	co.parabox.scene.get.mesh.c \
-#	co.parabox.points.triangulate.c \
 	co.parabox.shader.make.uniform.c
-#	triangulate/Delaunay.cc
+
+
 
 OTHER_FILES += $$NODE_SOURCES
 
@@ -44,16 +45,13 @@ QMAKE_CLEAN = *.vuonode
 
 TYPE_SOURCES += \
 	PbxShaderUniform.c \
-#	PbxTriangulator.cc \
 	VuoList_PbxShaderUniform.cc
 
 OTHER_FILES += $$TYPE_SOURCES
 
 HEADERS += \
 	PbxShaderUniform.h \
-#	PbxTriangulator.h \
-	VuoList_PbxShaderUniform.h \
-	Delauney.h
+	VuoList_PbxShaderUniform.h
 
 VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
