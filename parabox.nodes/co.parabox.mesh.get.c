@@ -25,8 +25,8 @@ VuoModuleMetadata({
 					 }
 				 });
 
-// @todo vuo 1.3 will change this to VuoSubmesh_download
-void VuoSubmeshMesh_download(VuoSubmesh* submesh) __attribute((weak));
+//// @todo vuo 1.3 will change this to VuoSubmesh_download
+void VuoSubmeshMesh_download(VuoSubmesh* submesh) __attribute__ ((weak));
 
 // @todo better way to allocate arrays?
 void GetMeshValues(	const VuoSceneObject* object,
@@ -89,10 +89,11 @@ void GetMeshValues(	const VuoSceneObject* object,
 	}
 }
 
-void VuoSubmeshMesh_download(VuoSubmesh* submesh)
-{
-	VuoSubmesh_download(submesh);
-}
+//void VuoSubmeshMesh_download(VuoSubmesh *submesh)
+//{
+//	VuoSubmesh_download(submesh);
+//}
+
 
 void nodeEvent
 (
