@@ -12,10 +12,12 @@ NODE_SOURCES += \
 	co.parabox.mesh.make.normals.c \
 	co.parabox.mesh.make.uvlines.c \
 	co.parabox.shader.make.glsl.c \
+	co.parabox.layer.sceneObject.c \
 	co.parabox.list.average.c \
 	co.parabox.text.contains.c \
 	co.parabox.list.bounds.c \
 	co.parabox.utility.fps.c \
+	co.parabox.layer.name.c \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
 	co.parabox.sceneObject.layer.c \
@@ -54,7 +56,7 @@ HEADERS += \
 	PbxShaderUniform.h \
 	VuoList_PbxShaderUniform.h
 
-VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.2.0-sdk/framework
+#VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 
 type.input = TYPE_SOURCES

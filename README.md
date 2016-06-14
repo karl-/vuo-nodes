@@ -5,6 +5,9 @@ Custom nodes and subcompositions for use with Vuo.
 
 ## Available Nodes
 
+- `Assign Name to Layer` – Sets the name of a layer (only operates on top level layer).
+- `Convert Layer to SceneObject` – Converts a Layer to a Scene Object.
+- `Convert 3D Object to Layer` – Converts a 3D object to a Layer.
 - `Decimate Events` – Allows only one event per-X number of events through.  Useful to siphon data down to samples every X number of events.
 - `Read Text File` – Read all text from a file.
 - `Average List` – Keeps a rolling average of list values.  Handy for smoothing rapidly changing data.
