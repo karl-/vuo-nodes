@@ -25,7 +25,7 @@ VuoModuleMetadata({
 					 }
 				 });
 
-//// @todo vuo 1.3 will change this to VuoSubmesh_download
+// @todo vuo 1.3 will change this to VuoSubmesh_download
 void VuoSubmeshMesh_download(VuoSubmesh* submesh) __attribute__ ((weak));
 
 // @todo better way to allocate arrays?
@@ -94,10 +94,28 @@ void GetMeshValues(	const VuoSceneObject* object,
 //	VuoSubmesh_download(submesh);
 //}
 
+static void transformPoints(VuoList_VuoPoint3d* points, float* matrix)
+{
+	unsigned long len = VuoListGetCount_VuoPoint3d(*points);
+	VuoPoint3d* array = VuoListGetData_VuoPoint3d(*points);
+
+	for(unsigned long i = 0; i < len; i++)
+		array[i] = VuoTransform_transformPoint(matrix, array[i]);
+}
+
+static void transformDirections(VuoList_VuoPoint3d* points, const VuoPoint4d rotation)
+{
+	unsigned long len = VuoListGetCount_VuoPoint3d(*points);
+	VuoPoint3d* array = VuoListGetData_VuoPoint3d(*points);
+
+	for(unsigned long i = 0; i < len; i++)
+		array[i] = VuoTransform_rotateVectorWithQuaternion(array[i], rotation);
+}
 
 void nodeEvent
 (
 		VuoInputData(VuoSceneObject) object,
+		VuoInputData(VuoBoolean, {"default":false}) applyTransform,
 		VuoOutputData(VuoList_VuoPoint3d) positions,
 		VuoOutputData(VuoList_VuoInteger) elements,
 		VuoOutputData(VuoList_VuoPoint3d) normals,
@@ -113,4 +131,18 @@ void nodeEvent
 	*textures 	= VuoListCreate_VuoPoint2d();
 
 	GetMeshValues(&object, 0, positions, normals, tangents, bitangents, textures, elements);
+
+	if(applyTransform)
+	{
+		VuoTransform transform = object.transform;
+
+		float matrix[16];
+		VuoTransform_getMatrix(transform, matrix);
+		VuoPoint4d rotation = VuoTransform_getQuaternion(transform);
+
+		transformPoints(positions, matrix);
+		transformDirections(normals, rotation);
+		transformDirections(tangents, rotation);
+		transformDirections(bitangents, rotation);
+	}
 }
