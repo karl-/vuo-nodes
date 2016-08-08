@@ -1,6 +1,10 @@
 TEMPLATE = aux
 cache()
 
+VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.2.0-sdk/framework # ~/vuo/trunk/framework
+VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
+QMAKE_PRE_LINK += mkdir -p "$${VUO_USER_MODULES_PATH}"
+
 NODE_SOURCES += \
 	co.parabox.data.make.keyValuePair.c \
 	co.parabox.time.get.c \
@@ -29,12 +33,7 @@ NODE_SOURCES += \
 	## just for testing input editors
 	co.parabox.test.inputEditors.c
 
-
 OTHER_FILES += $$NODE_SOURCES
-
-VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.2.0-sdk/framework # ~/vuo/trunk/framework
-VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
-QMAKE_PRE_LINK += mkdir -p "$${VUO_USER_MODULES_PATH}"
 
 node.input = NODE_SOURCES
 node.output = ${QMAKE_FILE_IN_BASE}.vuonode
@@ -63,7 +62,7 @@ VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 type.input = TYPE_SOURCES
 type.output = ${QMAKE_FILE_IN_BASE}.bc
 type.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
-	# && zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} `basename ${QMAKE_FILE_IN_BASE}`.h \
+	&& zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} \
 	&& zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
 	&& mkdir -p "$${VUO_USER_MODULES_PATH}" \
 	&& cp co.parabox.nodes.vuonode "$${VUO_USER_MODULES_PATH}" \
