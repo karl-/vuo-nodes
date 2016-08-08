@@ -25,8 +25,9 @@ NODE_SOURCES += \
 	co.parabox.scene.get.transform.c \
 	co.parabox.layer.make.material.c \
 	co.parabox.scene.get.mesh.c \
-	co.parabox.shader.make.uniform.c
-
+	co.parabox.shader.make.uniform.c \
+	## just for testing input editors
+	co.parabox.test.inputEditors.c
 
 
 OTHER_FILES += $$NODE_SOURCES
@@ -39,6 +40,7 @@ node.input = NODE_SOURCES
 node.output = ${QMAKE_FILE_IN_BASE}.vuonode
 node.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
 	&& zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} `basename ${QMAKE_FILE_IN}` \
+	&& zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
 	&& mkdir -p "$${VUO_USER_MODULES_PATH}"
 QMAKE_EXTRA_COMPILERS += node
 
@@ -56,16 +58,25 @@ HEADERS += \
 	PbxShaderUniform.h \
 	VuoList_PbxShaderUniform.h
 
-#VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.1.1-sdk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 
 type.input = TYPE_SOURCES
 type.output = ${QMAKE_FILE_IN_BASE}.bc
 type.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
-	&& zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} `basename ${QMAKE_FILE_IN_BASE}`.h \
+	# && zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} `basename ${QMAKE_FILE_IN_BASE}`.h \
+	&& zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
 	&& mkdir -p "$${VUO_USER_MODULES_PATH}" \
 	&& cp co.parabox.nodes.vuonode "$${VUO_USER_MODULES_PATH}" \
 	&& cp co.parabox.nodes.vuonode ../bin
-QMAKE_EXTRA_COMPILERS += type
+
+header.input = HEADERS
+header.output = ${QMAKE_FILE_IN_BASE}.h
+header.commands = zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
+	&& mkdir -p "$${VUO_USER_MODULES_PATH}" \
+	&& cp co.parabox.nodes.vuonode "$${VUO_USER_MODULES_PATH}" \
+	&& cp co.parabox.nodes.vuonode ../bin
+
+QMAKE_EXTRA_COMPILERS += type \
+	header
 
 QMAKE_CLEAN += *.bc
