@@ -2,9 +2,6 @@
  * @file
  * PbxShaderUniform implementation.
  *
- * @copyright Copyright © 2012–2014 Kosada Incorporated.
- * This code may be modified and distributed under the terms of the MIT License.
- * For more information, see http://vuo.org/license.
  */
 
 #include <stdio.h>
@@ -36,7 +33,7 @@ PbxShaderUniform PbxShaderUniform_makeFromJson(json_object * js)
 	{
 		kvp.type = PbxShaderUniformType_VuoReal;
 		kvp.value.realValue = VuoReal_makeFromJson(o);
-	} 
+	}
 	else if(json_object_object_get_ex(js, "intValue", &o))
 	{
 		kvp.type = PbxShaderUniformType_VuoInteger;
@@ -88,21 +85,21 @@ json_object * PbxShaderUniform_getJson(const PbxShaderUniform kvp)
 			json_object_object_add(js, "intValue", valueObject);
 			break;
 		}
-		
+
 		case PbxShaderUniformType_VuoImage:
 		{
 			json_object *valueObject = VuoImage_getJson(kvp.value.imageValue);
 			json_object_object_add(js, "imageValue", valueObject);
 			break;
 		}
-		
+
 		case PbxShaderUniformType_VuoPoint2d:
 		{
 			json_object *valueObject = VuoPoint2d_getJson(kvp.value.point2dvalue);
 			json_object_object_add(js, "point2dvalue", valueObject);
 			break;
 		}
-		
+
 		case PbxShaderUniformType_VuoPoint3d:
 		{
 			json_object *valueObject = VuoPoint3d_getJson(kvp.value.point3dvalue);
@@ -130,13 +127,13 @@ char * PbxShaderUniform_getSummary(const PbxShaderUniform kvp)
 
 		case PbxShaderUniformType_VuoInteger:
 			return VuoText_format("%s: %lli", kvp.name, kvp.value.intValue);
-			
+
 		case PbxShaderUniformType_VuoImage:
 			return VuoText_format("%s: %u", kvp.name, kvp.value.imageValue->glTextureName);
-			
+
 		case PbxShaderUniformType_VuoPoint2d:
 			return VuoText_format("%s: {%f, %f}", kvp.name, kvp.value.point2dvalue.x, kvp.value.point2dvalue.y );
-			
+
 		case PbxShaderUniformType_VuoPoint3d:
 			return VuoText_format("%s: {%f, %f, %f}", kvp.name, kvp.value.point3dvalue.x, kvp.value.point3dvalue.y, kvp.value.point3dvalue.z);
 

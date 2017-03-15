@@ -2,7 +2,6 @@
  * @file
  * co.parabox.utility.fps node implementation.
  *
- * Karl wrote this.  Do whatever you want with it.
  */
 
 #include "node.h"

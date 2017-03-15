@@ -2,9 +2,6 @@
  * @file
  * co.parabox.time.get node implementation.
  *
- * @copyright Copyright © 2012–2014 Kosada Incorporated.
- * This code may be modified and distributed under the terms of the MIT License.
- * For more information, see http://vuo.org/license.
  */
 
 #include "node.h"
@@ -25,7 +22,7 @@ void nodeEvent
 (
 		VuoOutputData(VuoInteger) year,
 		VuoOutputData(VuoInteger) month,
-		VuoOutputData(VuoInteger) day, 
+		VuoOutputData(VuoInteger) day,
 		VuoOutputData(VuoInteger) hour,
 		VuoOutputData(VuoInteger) minute,
 		VuoOutputData(VuoInteger) second

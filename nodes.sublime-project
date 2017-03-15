@@ -22,6 +22,36 @@
 				"pch",
 				"binary"
 			],
+		},
+		{
+			"path": "~/vuo/trunk",
+			"folder_exclude_patterns":
+			[
+				".git",
+				".svn",
+				"framework",
+				"framework32",
+				"*.dSYM",
+				"node_modules",
+				"pch",
+				"editor/VuoEditorApp",
+			],
+			"file_exclude_patterns":
+			[
+				"moc_*.cpp",
+				"*.bc",
+				"*.vuonode",
+				"*.moc",
+				"*.dSYM",
+				"*.exe",
+				".editorconfig",
+				"*.stash",
+				"*.cache",
+				"*.pch",
+				"*.shared",
+				"Makefile",
+				"*.user",
+			]
 		}
 	]
 }

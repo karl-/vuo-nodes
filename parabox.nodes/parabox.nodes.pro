@@ -1,7 +1,7 @@
 TEMPLATE = aux
 cache()
 
-VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.2.0-sdk/framework # ~/vuo/trunk/framework
+VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.2.5-sdk/framework # ~/vuo/trunk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 QMAKE_PRE_LINK += mkdir -p "$${VUO_USER_MODULES_PATH}"
 
@@ -17,6 +17,8 @@ NODE_SOURCES += \
 	co.parabox.mesh.make.uvlines.c \
 	co.parabox.shader.make.glsl.c \
 	co.parabox.layer.sceneObject.c \
+	co.parabox.image.get.id.c \
+	co.parabox.image.simulateProcessing.c \
 	co.parabox.list.average.c \
 	co.parabox.text.contains.c \
 	co.parabox.list.bounds.c \
@@ -25,7 +27,9 @@ NODE_SOURCES += \
 	co.parabox.utility.slider.c \
 	co.parabox.event.drop.c \
 	co.parabox.sceneObject.layer.c \
+	co.parabox.image.make.pixels.c \
 #	co.parabox.coordinate.pixels.vuo.c \
+	co.parabox.transform.debug.c \
 	co.parabox.scene.get.transform.c \
 	co.parabox.layer.make.material.c \
 	co.parabox.scene.get.mesh.c \
