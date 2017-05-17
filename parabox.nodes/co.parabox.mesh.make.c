@@ -39,77 +39,67 @@ void nodeEvent
 		VuoOutputData(VuoMesh) mesh
 )
 {
-	VuoSubmesh submesh;
+	unsigned int m_VertexCount = VuoListGetCount_VuoPoint3d(positions);
+	unsigned int m_ElementCount = VuoListGetCount_VuoInteger(elements);
 
-	unsigned int vertexCount = VuoListGetCount_VuoPoint3d(positions);
-	unsigned int elementCount = VuoListGetCount_VuoInteger(elements);
+	if(m_VertexCount < 3 || m_ElementCount < 3)
+		return;
 
-	if(vertexCount < 3 || elementCount < 3) return;
+	VuoPoint4d 	*m_Positions = NULL,
+				*m_Normals = NULL,
+				*m_Textures = NULL;
 
-	// These two must always be present
-	VuoPoint4d* m_positions = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * vertexCount);
-	unsigned int* m_elements = (unsigned int*)malloc(sizeof(unsigned int) * elementCount);
+	unsigned int* m_Elements = (unsigned int*)malloc(sizeof(unsigned int) * m_ElementCount);
 
 	// Populate positions
-	for(int i = 0; i < vertexCount; i++)
+	m_Positions = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * m_VertexCount);
+
+	for(int i = 0; i < m_VertexCount; i++)
 	{
 		VuoPoint3d v = VuoListGetValue_VuoPoint3d(positions, i+1);
-		m_positions[i] = (VuoPoint4d) {v.x, v.y, v.z, 1.};
+		m_Positions[i] = (VuoPoint4d) {v.x, v.y, v.z, 1.};
 	}
 
-	for(int i = 0; i < elementCount; i++)
+	// Elements
+	for(int i = 0; i < m_ElementCount; i++)
 	{
-		m_elements[i] = VuoListGetValue_VuoInteger(elements, i+1);
+		m_Elements[i] = VuoListGetValue_VuoInteger(elements, i+1);
 	}
 
-	submesh.vertexCount = vertexCount;
-	submesh.positions = m_positions;
+	// Optional:
 
-	submesh.elementCount			= elementCount;
-	submesh.elements				= m_elements;
-	submesh.elementAssemblyMethod 	= VuoMesh_IndividualTriangles;
-
-	// Now the optional stuff:
-
-	if( VuoListGetCount_VuoPoint3d(normals) == vertexCount )
+	// Normals
+	if( VuoListGetCount_VuoPoint3d(normals) == m_VertexCount )
 	{
-		VuoPoint4d* m_normals = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * vertexCount);
+		m_Normals = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * m_VertexCount);
 
-		for(int i = 0; i < vertexCount; i++)
+		for(int i = 0; i < m_VertexCount; i++)
 		{
 			VuoPoint3d v = VuoListGetValue_VuoPoint3d(normals, i+1);
-			m_normals[i] = (VuoPoint4d) {v.x, v.y, v.z, 1.};
+			m_Normals[i] = (VuoPoint4d) {v.x, v.y, v.z, 1.};
 		}
-
-		submesh.normals = m_normals;
-	}
-	else
-	{
-		submesh.normals = NULL;
 	}
 
-	if( VuoListGetCount_VuoPoint2d(textures) == vertexCount )
+	if( VuoListGetCount_VuoPoint2d(textures) == m_VertexCount )
 	{
-		VuoPoint4d* m_textures = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * vertexCount);
+		m_Textures = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * m_VertexCount);
 
-		for(int i = 0; i < vertexCount; i++)
+		for(int i = 0; i < m_VertexCount; i++)
 		{
 			VuoPoint2d v = VuoListGetValue_VuoPoint2d(textures, i+1);
-			m_textures[i] = (VuoPoint4d) {v.x, v.y, 0., 1.};
+			m_Textures[i] = (VuoPoint4d) {v.x, v.y, 0., 1.};
 		}
-
-		submesh.textureCoordinates = m_textures;
-	}
-	else
-	{
-		submesh.textureCoordinates	= NULL;
 	}
 
-
-	submesh.tangents			= NULL; // tangents are probably not going to be commonly user set
-	submesh.bitangents			= NULL; // ditto;
-
-	submesh.faceCullingMode = GL_BACK;
+	VuoSubmesh submesh = VuoSubmesh_makeFromBuffers(m_VertexCount,
+													m_Positions,
+													m_Normals,
+													NULL,
+													NULL,
+													m_Textures,
+													m_ElementCount,
+													m_Elements,
+													VuoMesh_IndividualTriangles);
 
 	*mesh = VuoMesh_makeFromSingleSubmesh(submesh);
 }
