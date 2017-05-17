@@ -40,7 +40,6 @@ struct nodeInstanceData
 {
 	VuoShader shader;
 	VuoGlContext glContext;
-	VuoImageRenderer imageRenderer;
 };
 
 struct nodeInstanceData * nodeInstanceInit(void)
@@ -49,9 +48,6 @@ struct nodeInstanceData * nodeInstanceInit(void)
 	VuoRegister(instance, free);
 
 	instance->glContext = VuoGlContext_use();
-
-	instance->imageRenderer = VuoImageRenderer_make(instance->glContext);
-	VuoRetain(instance->imageRenderer);
 	
 	instance->shader = VuoShader_make("Bar Graph Shader");
 	VuoShader_addSource(instance->shader, VuoMesh_IndividualTriangles, NULL, NULL, barGraphFragmentShader);
@@ -113,12 +109,11 @@ void nodeInstanceEvent
 	VuoShader_setUniform_VuoImage((*instance)->shader, "data", gradientStrip);
 
 	// Render.
-	*image = VuoImageRenderer_draw((*instance)->imageRenderer, (*instance)->shader, width, height, VuoImageColorDepth_8);
+	*image = VuoImageRenderer_render((*instance)->shader, width, height, VuoImageColorDepth_8);
 }
 
 void nodeInstanceFini(VuoInstanceData(struct nodeInstanceData *) instance)
 {
 	VuoRelease((*instance)->shader);
-	VuoRelease((*instance)->imageRenderer);
 	VuoGlContext_disuse((*instance)->glContext);
 }

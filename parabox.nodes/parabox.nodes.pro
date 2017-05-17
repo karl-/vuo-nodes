@@ -1,9 +1,11 @@
 TEMPLATE = aux
 cache()
 
-VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.2.5-sdk/framework # ~/vuo/trunk/framework
+VUO_FRAMEWORK_PATH = ~/vuo/trunk/framework
+#VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.2.5-sdk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 QMAKE_PRE_LINK += mkdir -p "$${VUO_USER_MODULES_PATH}"
+FRAMEWORK_HEADERS = ~/vuo/trunk/framework/Vuo.framework/Headers
 
 NODE_SOURCES += \
 	co.parabox.data.make.keyValuePair.c \
@@ -18,8 +20,10 @@ NODE_SOURCES += \
 	co.parabox.shader.make.glsl.c \
 	co.parabox.layer.sceneObject.c \
 	co.parabox.image.get.id.c \
-	co.parabox.image.simulateProcessing.c \
 	co.parabox.list.average.c \
+	co.parabox.convert.quaternion.c \
+	co.parabox.convert.euler.c \
+	co.parabox.convert.rotationMatrix.c \
 	co.parabox.text.contains.c \
 	co.parabox.list.bounds.c \
 	co.parabox.utility.fps.c \
@@ -28,20 +32,20 @@ NODE_SOURCES += \
 	co.parabox.event.drop.c \
 	co.parabox.sceneObject.layer.c \
 	co.parabox.image.make.pixels.c \
-#	co.parabox.coordinate.pixels.vuo.c \
 	co.parabox.transform.debug.c \
+	co.parabox.transform.make.matrix.c \
 	co.parabox.scene.get.transform.c \
 	co.parabox.layer.make.material.c \
 	co.parabox.scene.get.mesh.c \
 	co.parabox.shader.make.uniform.c \
 	## just for testing input editors
-	co.parabox.test.inputEditors.c
+	# co.parabox.test.inputEditors.c
 
 OTHER_FILES += $$NODE_SOURCES
 
 node.input = NODE_SOURCES
 node.output = ${QMAKE_FILE_IN_BASE}.vuonode
-node.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
+node.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --verbose --header-search-path $${FRAMEWORK_HEADERS} --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
 	&& zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} `basename ${QMAKE_FILE_IN}` \
 	&& zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
 	&& mkdir -p "$${VUO_USER_MODULES_PATH}"
@@ -65,7 +69,7 @@ VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 
 type.input = TYPE_SOURCES
 type.output = ${QMAKE_FILE_IN_BASE}.bc
-type.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
+type.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --verbose --header-search-path $${FRAMEWORK_HEADERS} --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
 	&& zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} \
 	&& zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
 	&& mkdir -p "$${VUO_USER_MODULES_PATH}" \
