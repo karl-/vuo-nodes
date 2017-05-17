@@ -4,8 +4,8 @@
  */
 
 #include "node.h"
-#include "VuoLayer.h"
 #include "VuoMesh.h"
+#include "VuoLayer.h"
 
 VuoModuleMetadata({	"title" : "Convert Layer to 3D Object",
 					"keywords" : [ "sneaky", "scene", "2d" ],

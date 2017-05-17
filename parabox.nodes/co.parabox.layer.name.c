@@ -15,7 +15,10 @@ void nodeEvent
 )
 {
 	renamedLayer->sceneObject = VuoSceneObject_copy(layer.sceneObject);
+
 	if(renamedLayer->sceneObject.name != NULL)
 		VuoRelease(renamedLayer->sceneObject.name);
-	renamedLayer->sceneObject.name = VuoText_make(layerName);
+//		free((char*)renamedLayer->sceneObject.name);
+
+	renamedLayer->sceneObject.name = layerName;
 }
