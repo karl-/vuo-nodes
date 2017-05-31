@@ -22,9 +22,6 @@ VuoModuleMetadata({
 					 }
 				 });
 
-// @todo vuo 1.3 will change this to VuoSubmesh_download
-void VuoSubmeshMesh_download(VuoSubmesh* submesh) __attribute__ ((weak));
-
 // @todo better way to allocate arrays?
 void GetMeshValues(	const VuoSceneObject* object,
 					unsigned int vertexOffset,
@@ -50,7 +47,7 @@ void GetMeshValues(	const VuoSceneObject* object,
 
 			// if a geometry shader was used to transform the mesh positions can be null.
 			if( submesh->positions == NULL )
-				VuoSubmeshMesh_download(submesh);
+				VuoSubmesh_download(submesh);
 
 			for(unsigned int CurIndex = 0; CurIndex < submesh->vertexCount; CurIndex++)
 			{
@@ -84,11 +81,6 @@ void GetMeshValues(	const VuoSceneObject* object,
 		VuoSceneObject obj = VuoListGetValue_VuoSceneObject(object->childObjects, i+1);
 		GetMeshValues(&obj, curIndex, positions, normals, tangents, bitangents, textures, elements);
 	}
-}
-
-void VuoSubmeshMesh_download(VuoSubmesh *submesh)
-{
-	VuoSubmesh_download(submesh);
 }
 
 static void transformPoints(VuoList_VuoPoint3d* points, float* matrix)
