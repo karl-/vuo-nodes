@@ -31,11 +31,21 @@ void nodeEvent
 			] }) positions,
 		VuoInputData(VuoList_VuoInteger, {"default": [ 0, 1, 2 ]}) elements,
 		VuoInputData(VuoList_VuoPoint3d, {"default": [] }) normals,
+		VuoInputData(VuoList_VuoPoint3d, {"default": [] }) tangents,
+		VuoInputData(VuoList_VuoPoint3d, {"default": [] }) bitangents,
 		VuoInputData(VuoList_VuoPoint2d, {"default": [
 				{"x": 0.0, "y": 0.0},
 				{"x": 1.0, "y": 0.0},
 				{"x": 0.5, "y": 0.8},
 			] }) textures,
+		VuoInputData(VuoInteger, { "menuItems":{
+			"0":"IndividualTriangles",
+			"1":"TriangleStrip",
+			"2":"TriangleFan",
+			"3":"IndividualLines",
+			"4":"LineStrip",
+			"5":"Points"
+		}, "default":0} ) elementAssemblyMethod,
 		VuoOutputData(VuoMesh) mesh
 )
 {
@@ -47,6 +57,8 @@ void nodeEvent
 
 	VuoPoint4d 	*m_Positions = NULL,
 				*m_Normals = NULL,
+				*m_Tangents = NULL,
+				*m_Bitangents = NULL,
 				*m_Textures = NULL;
 
 	unsigned int* m_Elements = (unsigned int*)malloc(sizeof(unsigned int) * m_ElementCount);
@@ -80,6 +92,31 @@ void nodeEvent
 		}
 	}
 
+	// Tangents
+	if( VuoListGetCount_VuoPoint3d(tangents) == m_VertexCount )
+	{
+		m_Tangents = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * m_VertexCount);
+
+		for(int i = 0; i < m_VertexCount; i++)
+		{
+			VuoPoint3d v = VuoListGetValue_VuoPoint3d(tangents, i+1);
+			m_Tangents[i] = (VuoPoint4d) {v.x, v.y, v.z, 1.};
+		}
+	}
+
+
+	// Bitangents
+	if( VuoListGetCount_VuoPoint3d(bitangents) == m_VertexCount )
+	{
+		m_Bitangents = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * m_VertexCount);
+
+		for(int i = 0; i < m_VertexCount; i++)
+		{
+			VuoPoint3d v = VuoListGetValue_VuoPoint3d(bitangents, i+1);
+			m_Bitangents[i] = (VuoPoint4d) {v.x, v.y, v.z, 1.};
+		}
+	}
+
 	if( VuoListGetCount_VuoPoint2d(textures) == m_VertexCount )
 	{
 		m_Textures = (VuoPoint4d*)malloc(sizeof(VuoPoint4d) * m_VertexCount);
@@ -91,15 +128,21 @@ void nodeEvent
 		}
 	}
 
+	VuoMesh_ElementAssemblyMethod assemblyMethod = elementAssemblyMethod == 1 ? VuoMesh_TriangleStrip :
+		elementAssemblyMethod == 2 ? VuoMesh_TriangleFan :
+		elementAssemblyMethod == 3 ? VuoMesh_IndividualLines :
+		elementAssemblyMethod == 4 ? VuoMesh_LineStrip :
+		elementAssemblyMethod == 5 ? VuoMesh_Points : VuoMesh_IndividualTriangles;
+
 	VuoSubmesh submesh = VuoSubmesh_makeFromBuffers(m_VertexCount,
 													m_Positions,
 													m_Normals,
-													NULL,
-													NULL,
+													m_Tangents,
+													m_Bitangents,
 													m_Textures,
 													m_ElementCount,
 													m_Elements,
-													VuoMesh_IndividualTriangles);
+													assemblyMethod);
 
 	*mesh = VuoMesh_makeFromSingleSubmesh(submesh);
 }
