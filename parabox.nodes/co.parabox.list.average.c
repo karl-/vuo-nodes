@@ -10,10 +10,10 @@
 #include <stdio.h>
 
 VuoModuleMetadata({
-					 "title" : "Average List",
+					 "title" : "Rolling Average List",
 					 "keywords" : [ "rolling", "mean" ],
 					 "version" : "1.0.0",
-					 "description": "Maintains a rolling average of a list.",
+					 "description": "Maintains a rolling average of each item in a list.",
 					 "genericTypes" : {
 						"VuoGenericType1" : {
 							"compatibleTypes" : [ "VuoReal", "VuoInteger", "VuoPoint2d", "VuoPoint3d", "VuoPoint4d" ]
@@ -43,7 +43,7 @@ static int maxSamples(struct nodeInstanceData* instance)
 	int max = instance->availableSamples > 0 ? instance->samples[0].size : 0;
 
 	for(int i = 1; i < instance->availableSamples; i++)
-		max = MAX(max, instance->samples[i].size);
+		max = MIN(max, instance->samples[i].size);
 
 	return max;
 }
@@ -91,25 +91,23 @@ static void addSamples(struct nodeInstanceData* instance, VuoList_VuoGenericType
 	unsigned int index = instance->index;
 	unsigned int len = VuoListGetCount_VuoGenericType1(list);
 
-	// @todo realloc or just alloc a bigger space to avoid constant free/malloc
-	if( instance->samples[index].samples != NULL )
+	if( instance->samples[index].samples != NULL || instance->samples[index].size != len)
 	{
 		free(instance->samples[index].samples);
+		instance->samples[index].samples = NULL;
 	}
 
-	instance->samples[index].samples = (VuoGenericType1*) malloc(sizeof(VuoGenericType1) * len);
+	if(instance->samples[index].samples == NULL)
+		instance->samples[index].samples = (VuoGenericType1*) malloc(sizeof(VuoGenericType1) * len);
 
 	instance->samples[index].size = len;
-	instance->availableSamples++;
-
-	instance->availableSamples = MIN(instance->availableSamples, instance->max);
+	instance->availableSamples = MIN(++instance->availableSamples, instance->max);
 
 	for(int i = 0; i < len; i++)
-	{
 		instance->samples[index].samples[i] = VuoListGetValue_VuoGenericType1(list, i+1);
-	}
 
 	instance->index++;
+
 	if(instance->index > instance->max-1)
 		instance->index = 0;
 }
@@ -138,9 +136,7 @@ static VuoList_VuoGenericType1 getAverage(struct nodeInstanceData* instance)
 		}
 
 		for(unsigned int i = 0; i < max; i++)
-		{
-			VuoListAppendValue_VuoGenericType1(list, VuoGenericType1_multiply(avg[i], (float)instance->availableSamples));
-		}
+			VuoListAppendValue_VuoGenericType1(list, VuoGenericType1_multiply(avg[i], 1.f / (float) MAX(1, instance->availableSamples)));
 	}
 
 	return list;
@@ -169,9 +165,7 @@ void nodeInstanceEvent
 )
 {
 	if( sampleSize != (*instance)->max )
-	{
 		resetSamples( *instance, sampleSize );
-	}
 
 	addSamples( *instance, list );
 
