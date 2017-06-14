@@ -23,6 +23,10 @@ VuoModuleMetadata({
 					 }
 				 });
 
+// Not defined in VuoMesh header as of 1.2.6
+// void VuoSubmesh_download(VuoSubmesh* submesh);
+void VuoSubmeshMesh_download(VuoSubmesh* submesh);
+
 // @todo better way to allocate arrays?
 void GetMeshValues(	const VuoSceneObject* object,
 					const VuoMesh_ElementAssemblyMethod elementAssemblyMethod,
@@ -49,7 +53,7 @@ void GetMeshValues(	const VuoSceneObject* object,
 
 			// if a geometry shader was used to transform the mesh positions can be null.
 			if( submesh->positions == NULL )
-				VuoSubmesh_download(submesh);
+				VuoSubmeshMesh_download(submesh);
 
 			for(unsigned int CurIndex = 0; CurIndex < submesh->vertexCount; CurIndex++)
 			{
