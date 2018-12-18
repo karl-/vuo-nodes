@@ -2,10 +2,12 @@ TEMPLATE = aux
 cache()
 
 VUO_FRAMEWORK_PATH = ~/vuo/trunk/framework
-#VUO_FRAMEWORK_PATH = ~/sdk/vuo-1.2.5-sdk/framework
 VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
 QMAKE_PRE_LINK += mkdir -p "$${VUO_USER_MODULES_PATH}"
 FRAMEWORK_HEADERS = ~/vuo/trunk/framework/Vuo.framework/Headers
+
+
+## Compile nodes
 
 NODE_SOURCES += \
 	co.parabox.data.make.keyValuePair.c \
@@ -45,15 +47,11 @@ OTHER_FILES += $$NODE_SOURCES
 
 node.input = NODE_SOURCES
 node.output = ${QMAKE_FILE_IN_BASE}.vuonode
-node.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --verbose --header-search-path $${FRAMEWORK_HEADERS} --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
-	&& zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} `basename ${QMAKE_FILE_IN}` \
-	&& zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
-	&& mkdir -p "$${VUO_USER_MODULES_PATH}"
+node.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --header-search-path $${FRAMEWORK_HEADERS} --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN}
 QMAKE_EXTRA_COMPILERS += node
 
-QMAKE_CLEAN = *.vuonode
 
-## Types
+## Compile types
 
 TYPE_SOURCES += \
 	PbxShaderUniform.c \
@@ -65,25 +63,36 @@ HEADERS += \
 	PbxShaderUniform.h \
 	VuoList_PbxShaderUniform.h
 
-VUO_USER_MODULES_PATH = ~/Library/Application\ Support/Vuo/Modules
-
 type.input = TYPE_SOURCES
 type.output = ${QMAKE_FILE_IN_BASE}.bc
-type.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --verbose --header-search-path $${FRAMEWORK_HEADERS} --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN} \
-	&& zip co.parabox.nodes.vuonode ${QMAKE_FILE_OUT} \
-	&& zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
-	&& mkdir -p "$${VUO_USER_MODULES_PATH}" \
-	&& cp co.parabox.nodes.vuonode "$${VUO_USER_MODULES_PATH}" \
-	&& cp co.parabox.nodes.vuonode ../bin
+type.commands = $${VUO_FRAMEWORK_PATH}/vuo-compile --header-search-path $${FRAMEWORK_HEADERS} --output ${QMAKE_FILE_OUT} ${QMAKE_FILE_IN}
+QMAKE_EXTRA_COMPILERS += type
 
-header.input = HEADERS
-header.output = ${QMAKE_FILE_IN_BASE}.h
-header.commands = zip -j co.parabox.nodes.vuonode ${QMAKE_FILE_IN} \
-	&& mkdir -p "$${VUO_USER_MODULES_PATH}" \
-	&& cp co.parabox.nodes.vuonode "$${VUO_USER_MODULES_PATH}" \
-	&& cp co.parabox.nodes.vuonode ../bin
 
-QMAKE_EXTRA_COMPILERS += type \
-	header
+## Build the archive
 
-QMAKE_CLEAN += *.bc
+NODE_SET_ZIP = co.parabox.nodes.vuonode
+
+NODE_OBJECTS = $$NODE_SOURCES
+NODE_OBJECTS ~= s/\\.c$/.vuonode/g
+
+GENERIC_NODE_SOURCES = $$NODE_SOURCES
+
+TYPE_OBJECTS = $$TYPE_SOURCES
+TYPE_OBJECTS ~= s/\\.cc?$/.bc/g
+
+NODE_SET_ZIP_CONTENTS = \
+	$$NODE_OBJECTS \
+	$$TYPE_OBJECTS \
+	$$GENERIC_NODE_SOURCES \
+	$$HEADERS
+
+createNodeSetZip.commands = \
+	( [ -f $$NODE_SET_ZIP ] && rm $$NODE_SET_ZIP ) ; \
+	zip --quiet $$NODE_SET_ZIP $$NODE_SET_ZIP_CONTENTS \
+	&& cp $$NODE_SET_ZIP $$VUO_USER_MODULES_PATH
+createNodeSetZip.depends = $$NODE_SET_ZIP_CONTENTS
+createNodeSetZip.target = $$NODE_SET_ZIP
+POST_TARGETDEPS += $$NODE_SET_ZIP
+QMAKE_EXTRA_TARGETS += createNodeSetZip
+QMAKE_CLEAN += $$NODE_SET_ZIP
